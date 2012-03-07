@@ -1,0 +1,194 @@
+# Packages #
+############
+
+# Archives #
+*.7z
+*.jar
+*.rar
+*.zip
+*.gz
+*.bzip
+*.xz
+*.lzma
+
+# Packing #
+*.iso
+*.tar
+
+# Package Management #
+*.dmg
+*.xpi
+*.gem
+*.egg
+*.deb
+*.rpm
+
+# Logs and Databases #
+######################
+
+*.log
+*.sql
+*.sqlite
+
+# OS Generated Files #
+######################
+
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+._*
+.Spotlight-V100
+.Trashes
+
+# Eclipse #
+###########
+
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+
+# Tools
+.externalToolBuilders/
+
+# Locally Stored config
+*.launch
+
+# CDT-Specific
+.cproject
+
+# PDT-specific
+.buildpath
+
+# SublimeText #
+###############
+
+/*.sublime-project
+
+# Autotools #
+#############
+
+Makefile.in
+
+/autom4te.cache
+/aclocal.m4
+/compile
+/configure
+/depcomp
+/install-sh
+/missing
+
+# C++ #
+#######
+
+*.slo
+*.lo
+*.o
+
+*.so
+
+*.lai
+*.la
+*.a
+
+
+# Django #
+##########
+
+*.log
+*.pot
+*.pyc
+local_settings.py
+
+# Java #
+########
+
+*.class
+
+*.jar
+*.war
+*.ear
+
+# Latex #
+#########
+
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.fdb_latexmk
+*.glg
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.ist
+*.lof
+*.log
+*.lot
+*.nav
+*.nlo
+*.out
+*.pdfsync
+*.ps
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.maf
+*.mtc
+*.mtc0
+
+# XCode/Objective-C #
+#####################
+
+*.pbxuser
+!default.pbxuser
+*.modelv3
+!default.modelv3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.xcworkspace
+!default.xcworkspace
+xcuserdata
+profile
+*.moved-aside
+
+# Python #
+##########
+
+*.py[co]
+
+*.egg
+*.egg-info
+dist
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed-cfg
+
+pip-log.txt
+
+.coverage
+.tox
+
+*.mo
+
+.mr.developer.cfg
