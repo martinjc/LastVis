@@ -6,7 +6,7 @@ API_SECRET = '24f4b5164f6983d6613a047e1fbe7ce4'
 import os
 ROOT_PATH = os.path.dirname(__file__)
 
-ROOT_URL = 'http://boris.cs.cf.ac.uk/'
+ROOT_URL = 'http://boris.cs.cf.ac.uk/lastvis/'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -52,30 +52,31 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.join( ROOT_PATH, 'media' )
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = ROOT_URL + 'media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = '/usr/local/www/static/lastvis/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_URL = ROOT_URL + 'static/'
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = '/static/admin/'
+ADMIN_MEDIA_PREFIX = ROOT_URL + 'static/admin/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    os.path.join( ROOT_PATH, 'common/static' ),
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -108,11 +109,13 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'lastvis.urls'
+LOGIN_URL = ROOT_URL
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join( ROOT_PATH, 'common/templates' ),
 )
 
 INSTALLED_APPS = (
