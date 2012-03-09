@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <img src="{{STATIC_PATH}}img/logo.png">
+    <!-- <img src="{{STATIC_PATH}}img/logo.png"> -->
     {% if lastfmuser %}
         <h1>Welcome {{lastfmuser.user.username}}!</h1>
         <p> Click <a href="{{ root_url }}auth/logout/">here</a> to logout<p>
