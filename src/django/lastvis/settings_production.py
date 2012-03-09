@@ -164,7 +164,7 @@ LOGGING = {
         'file':{
             'level':'DEBUG',
             'class':'logging.FileHandler',
-            'filename' : 'output.log',
+            'filename' : os.path.join( ROOT_PATH, 'output.log'),
             'formatter': 'verbose'
         },
     },
