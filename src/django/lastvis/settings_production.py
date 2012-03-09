@@ -12,7 +12,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 LOGIN_URL = ROOT_URL
-AUTH_PROFILE_MODULE = "lastvis.lastfmauth.lastfmuser"
+AUTH_PROFILE_MODULE = "lastfmauth.lastfmuser"
 
 ADMINS = (
     ('Martin Chorley', 'm.j.chorley@cs.cardiff.ac.uk')
