@@ -1,10 +1,12 @@
 import datetime
 import hashlib
 import pickle
+import logging
 
 from tweepy.cache import Cache
 from lastvis.lastfmdata.models import CacheEntry
 
+logger = logging.getLogger( 'lastvis.custom' )
 
 class DjangoDBCache( Cache ):
 
@@ -35,9 +37,9 @@ class DjangoDBCache( Cache ):
         key = md5.hexdigest()
         try:
             value = CacheEntry.objects.get( key = key )
-            print 'CACHE: %s found in cache' % key
+            logger.info('CACHE: %s found in cache' % key)
         except CacheEntry.DoesNotExist:
-            print 'CACHE: %s not in cache' % key
+            logger.info('CACHE: %s not in cache' % key)
             return None
 
         if timeout is None:
@@ -45,7 +47,7 @@ class DjangoDBCache( Cache ):
         else:
             timeout = datetime.timedelta( seconds = timeout )
         if timeout >= datetime.timedelta( seconds = 0 ) and ( datetime.datetime.now() - value.time ) >= timeout:
-            print 'CACHE: %s is old, deleting' % key
+            logger.info('CACHE: %s is old, deleting' % key)
             value.delete()
             value = None
         else:

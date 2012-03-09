@@ -1,8 +1,11 @@
 import urllib
 import httplib
+import logging
 
 from lastpy.error import LastpyError
 from lastpy.models import Model
+
+logger = logging.getLogger( 'lastvis.custom' )
 
 def bind_api( **config ):
 
@@ -80,12 +83,12 @@ def bind_api( **config ):
                 cache_result = self.api.cache.get( store_url )
                 # if cache result found and not expired, return it
                 if cache_result:
-                    print 'EXECUTOR: found in cache'
+                    logger.info('EXECUTOR: found in cache')
                     if isinstance( cache_result, Model ):
                         cache_result.restore_api( self.api )
                     return cache_result
                 else:
-                    print 'EXECUTOR: not found in cache, hitting last.fm'
+                    logger.info('EXECUTOR: not found in cache, hitting last.fm')
 
             # parameters on url if GET, in post data if POST
             self.parameters['format'] = u'json'
@@ -98,7 +101,7 @@ def bind_api( **config ):
 
             self.headers['User-Agent'] = 'LastVis:5e1aff6b88998e05c176abbd5118d6ba'
 
-            print 'EXECUTOR: retrieving: %s' % url
+            logger.info('EXECUTOR: retrieving: %s' % url)
             retries_performed = 0
             while retries_performed < self.retry_count + 1:
 
@@ -125,7 +128,7 @@ def bind_api( **config ):
             conn.close()
 
             if self.use_cache and self.api.cache and self.method == 'GET' and result:
-                print 'EXECUTOR: storing result'
+                logger.info('EXECUTOR: storing result')
                 self.api.cache.store( store_url, result )
 
             return result
