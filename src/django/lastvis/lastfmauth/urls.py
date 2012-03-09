@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
-from lastfmauth.views import *
+from lastvis.lastfmauth.views import *
 
-urlpatterns = patterns( 'lastfmauth.views',
+urlpatterns = patterns( 'lastvis.lastfmauth.views',
 
     #
     # auth call

@@ -3,7 +3,7 @@ import hashlib
 import pickle
 
 from tweepy.cache import Cache
-from lastfmdata.models import CacheEntry
+from lastvis.lastfmdata.models import CacheEntry
 
 
 class DjangoDBCache( Cache ):

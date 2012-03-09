@@ -7,8 +7,8 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
-from lastfmauth.models import LastFMUser
-from lastpy import LastpyAuthHandler, API
+from lastvis.lastfmauth.models import LastFMUser
+from lastvis.lastpy import LastpyAuthHandler, API
 
 ROOT_URL = getattr( settings, 'ROOT_URL', 'http://127.0.0.1:8000/' )
 API_KEY = getattr( settings, 'API_KEY', '' )
