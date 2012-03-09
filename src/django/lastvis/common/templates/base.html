@@ -1,11 +1,52 @@
+<!doctype html>
 <html>
+
+    {% load static %}
+    {% get_static_prefix as STATIC_PATH %}
+
     <head>
-        <title>Example LastFm Authentication Django Site</title>
+        <meta charset="utf-8">
+        <title>{% block title %}LastVis{% endblock %}</title>
+        <meta name="description" content="LastVis - Last.FM Visualisations">
+        <meta name="author" content="Martin Chorley">
+        <meta name="author" content="Jonathan Quinn">
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script
+        src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <link rel="shortcut icon" type="image/x-icon" href="{{ STATIC_PATH }}favicon_32x32.ico">
+        <link rel="shortcut icon" type="image/x-icon" sizes="48x48" href="{{ STATIC_PATH }}favicon_48x48.ico">
+        <link rel="shortcut icon" type="image/x-icon" sizes="64x64" href="{{ STATIC_PATH }}favicon_64x64.ico">
+        <link rel="apple-touch-icon" href="{{ STATIC_PATH }}logo_57x57.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ STATIC_PATH }}logo_72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="{{ STATIC_PATH }}logo_114x114.png">
         {% block head %}
         {% endblock %}
     </head>
     <body>
+
+        <header>
+            {% block header %}
+            {% endblock %}
+        </header>
+
         {% block content %}
+        {% endblock %}
+
+        <footer>
+            {% block header %}
+            {% endblock %}
+        </footer>
+
+        <!-- Javascript down here! -->
+        <script>
+            var root_url = '{{ root_url }}';
+            var static_url = '{{ STATIC_PATH }}';
+        </script>
+        {% block scripts %}
         {% endblock %}
     </body>
 </html>

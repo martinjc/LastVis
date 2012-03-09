@@ -17,7 +17,7 @@ def bind_api( **config ):
 
         def __init__( self, api, args, kargs ):
 
-            # If authentication required and no authentication 
+            # If authentication required and no authentication
             # handler supplied, throw an error
 
             if self.require_auth and not api.auth_handler:
@@ -95,6 +95,8 @@ def bind_api( **config ):
             else:
                 self.headers['Content-type'] = u'application/x-www-form-urlencoded'
                 self.post_data = urllib.urlencode( self.parameters )
+
+            self.headers['User-Agent'] = 'LastVis:5e1aff6b88998e05c176abbd5118d6ba'
 
             print 'EXECUTOR: retrieving: %s' % url
             retries_performed = 0
