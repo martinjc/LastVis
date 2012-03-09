@@ -42,8 +42,7 @@ def main( request ):
             user, created = LastFMUser.objects.get_or_create( user = user, defaults = {
                                     'url' : data.url,
                                     'image' : img,
-                                    'playcount' : data.playcount,
-                                    'age' : data.age } )
+                                    'playcount' : data.playcount } )
             user = authenticate( username = data.name, password = '' )
             login( request, user )
             lastfm_user = user.get_profile()
