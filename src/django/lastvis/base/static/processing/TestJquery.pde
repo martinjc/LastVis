@@ -3,6 +3,7 @@ private int fontSize;
 private double pi2 = 2.0*3.141592653;
 
 Slice addData(String xmlString){
+  print(xmlString);
   XMLElement data = new XMLElement(xmlString);
 /*
   int totalplaycount = data.getAttribute("playcount");
