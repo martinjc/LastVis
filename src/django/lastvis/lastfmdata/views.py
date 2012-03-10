@@ -53,7 +53,7 @@ def weekly_chart( request, week ):
 
     weekly_chart_list = api.user_getweeklychartlist( user = user.user.username )
 
-    week = weekly_chart_list[week]
+    week = weekly_chart_list.charts[week]
 
     artists = api.user_getweeklyartistchart( user.user.username, week.start, week.end )
 
