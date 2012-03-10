@@ -48,7 +48,7 @@
                   var date = parseInt(dateText) / 1000;
                   alert(date);
                   for(var i in data.charts) {
-                      if(date >= data.charts[i].start && date <= data.charts[i.end]) {
+                      if(date >= data.charts[i].start && date <= data.charts[i].end) {
                           alert(data.charts[i].start + ' ' + data.charts[i].end );
                       }
                   } 
