@@ -51,13 +51,18 @@ def user_info( request, user_name = None ):
 def weekly_chart( request, week ):
     api, user = get_api_and_user( request )
 
+    genres = []
     weekly_chart_list = api.user_getweeklychartlist( user = user.user.username )
 
     week = weekly_chart_list.charts[int( week )]
 
     artists = api.user_getweeklyartistchart( user.user.username, week.start, week.end )
 
-    return return_data( request, artists.to_dict() )
+    for artist in artists.artists:
+        artist_info = api.artist_getinfo( name = artist.name )
+        genres.append( artist_info )
+
+    return return_data( request, {"chart" : genres} )
 
 @login_required
 def weekly_chart_list( request ):
