@@ -5,3 +5,7 @@ img.logo {
 	margin-top: 1em;
 	margin-bottom: 1em;
 }
+
+.hero-unit h1 {
+	color: #D51007;
+}
