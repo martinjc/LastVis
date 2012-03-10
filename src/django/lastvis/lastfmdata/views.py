@@ -2,6 +2,7 @@
 # Create your views here.
 import json
 import logging
+import copy
 from django.http import *
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -61,11 +62,9 @@ def weekly_chart( request, week ):
     artists = api.user_getweeklyartistchart( user.user.username, week.start, week.end )
 
     for i, artist in enumerate( artists.artists ):
-        logger.info( artist.name )
         artist_info = api.artist_getinfo( artist = artist.name )
         genres[i] = artist_info.to_dict()
-        logger.info( artist_info.to_dict() )
-        genres.append( artist_info.to_dict() )
+        genres.append( copy.deepcopy( artist_info.to_dict() ) )
         logger.info( genres )
 
     return return_data( request, {"chart" : genres} )
