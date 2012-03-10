@@ -4,7 +4,7 @@ API_KEY = '5e1aff6b88998e05c176abbd5118d6ba'
 API_SECRET = '24f4b5164f6983d6613a047e1fbe7ce4'
 
 import os
-ROOT_PATH = os.path.dirname(__file__)
+ROOT_PATH = os.path.dirname( __file__ )
 
 ROOT_URL = 'http://boris.cs.cf.ac.uk/lastvis/'
 
@@ -14,16 +14,16 @@ TEMPLATE_DEBUG = DEBUG
 LOGIN_URL = ROOT_URL
 AUTH_PROFILE_MODULE = "lastfmauth.lastfmuser"
 
-ADMINS = (
-    ('Martin Chorley', 'm.j.chorley@cs.cardiff.ac.uk')
-)
+ADMINS = ( 
+    ( 'Martin Chorley', 'm.j.chorley@cs.cardiff.ac.uk' )
+ )
 
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': os.path.join(ROOT_PATH, 'db.sqlite'),                      # Or path to database file if using sqlite3.
+        'NAME': os.path.join( ROOT_PATH, 'db.sqlite' ), # Or path to database file if using sqlite3.
     }
 }
 
@@ -75,50 +75,50 @@ STATIC_URL = ROOT_URL + 'static/'
 ADMIN_MEDIA_PREFIX = ROOT_URL + 'static/admin/'
 
 # Additional locations of static files
-STATICFILES_DIRS = (
+STATICFILES_DIRS = ( 
     os.path.join( ROOT_PATH, 'common/static' ),
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-)
+ )
 
 # List of finder classes that know how to find static files in
 # various locations.
-STATICFILES_FINDERS = (
+STATICFILES_FINDERS = ( 
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
-)
+ )
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '5h2ebqyxhngoy&m80lf=gsh+t4ws48kjx-++z%x9jy$&8hp#2('
 
 # List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
+TEMPLATE_LOADERS = ( 
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
-)
+ )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = ( 
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-)
+ )
 
 ROOT_URLCONF = 'lastvis.urls'
 LOGIN_URL = ROOT_URL
 
-TEMPLATE_DIRS = (
+TEMPLATE_DIRS = ( 
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     os.path.join( ROOT_PATH, 'common/templates' ),
-)
+ )
 
-INSTALLED_APPS = (
+INSTALLED_APPS = ( 
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -133,7 +133,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-)
+ )
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -164,7 +164,7 @@ LOGGING = {
         'file':{
             'level':'DEBUG',
             'class':'logging.FileHandler',
-            'filename' : os.path.join( ROOT_PATH, 'output.log'),
+            'filename' : os.path.join( ROOT_PATH, 'output.log' ),
             'formatter': 'verbose'
         },
     },
