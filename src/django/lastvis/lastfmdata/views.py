@@ -76,7 +76,13 @@ def monthly_chart( request, year, month ):
     weeks = []
 
     month_start = datetime.datetime( int( year ), int( month ), 01, 00, 00 )
-    month_end = datetime.datetime( int( year ), int( month ), 31, 23, 59 )
+    if int( month ) == 2:
+        days = 28
+    elif int( month ) in [4, 6, 9, 11]:
+        days = 30
+    else:
+        days = 31
+    month_end = datetime.datetime( int( year ), int( month ), days, 23, 59 )
 
     month_start_epoch = time.mktime( month_start.timetuple() )
     month_end_epoch = time.mktime( month_end.timetuple() )
