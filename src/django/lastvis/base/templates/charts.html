@@ -51,7 +51,7 @@
                           var chart_url = '{{root_url}}api/weeklychart/' + i + '/';
                           $.getJSON(chart_url, function(chart_data) {
                               var options = {
-                                  formatOutput = true,
+                                  formatOutput : true,
                               };
                               var xmlData = $.json2xml(chart_data.chart, options);
                               pjs.addData(xmlData);
