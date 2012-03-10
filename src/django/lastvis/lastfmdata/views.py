@@ -3,6 +3,7 @@
 import json
 import logging
 import copy
+import datetime
 from django.http import *
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -31,7 +32,7 @@ def get_api_and_user( request ):
     if session_key is not None:
 
             auth = LastpyAuthHandler( request.session['session_key'], API_KEY, API_SECRET )
-            cache = DjangoDBCache( timeout = 600 )
+            cache = DjangoDBCache( timeout = 3600 )
             api = API( auth, cache = cache )
 
     user = request.user
@@ -51,37 +52,96 @@ def user_info( request, user_name = None ):
 
     return HttpResponse( json.dumps( { 'user' : return_user.to_dict() } ), mimetype = 'application/json' )
 
+def yearly_chart( request, year ):
+    api, user = get_api_and_user( request )
+
+    weekly_chart_list = api.user_getweeklychartlist( user = user.user.username )
+    weeks = []
+
+    year_start = datetime.datetime( year, 01, 01, 00, 00 )
+    year_end = datetime.datetime( year, 12, 31, 23, 59 )
+
+    year_start_epoch = time.mktime( year_start.timetuple() )
+    year_end_epoch = time.mktime( year_end.timetuple() )
+    for week in weekly_chart_list.charts:
+        if week.start > year_start_epoch and week.start < year_end_epoch and week.end > year_start_epoch and week.end < year_end_epoch:
+            weeks.append( week )
+
+    return return_chart_data( request, api, user, weeks )
+
+def monthly_chart( request, year, month ):
+    api, user = get_api_and_user( request )
+
+    weekly_chart_list = api.user_getweeklychartlist( user = user.user.username )
+    weeks = []
+
+    month_start = datetime.datetime( year, month, 01, 00, 00 )
+    month_end = datetime.datetime( year, month, 31, 23, 59 )
+
+    month_start_epoch = time.mktime( month_start.timetuple() )
+    month_end_epoch = time.mktime( month_end.timetuple() )
+    for week in weekly_chart_list.charts:
+        if week.start > month_start_epoch and week.start < month_end_epoch and week.end > month_start_epoch and week.end < month_end_epoch:
+            weeks.append( week )
+
+    return return_chart_data( request, api, user, weeks )
+
+def return_chart_data( request, api, user, weeks, ):
+    genres = []
+
+    artist_totals = []
+
+    for week in weeks:
+        artists = api.user_getweeklyartistchart( user.user.username, week.start, week.end )
+        tracks = api.user_getweeklytrackchart( user.user.username, week.start, week.end )
+        for artist in artists.artists:
+            this_artist = None
+            for artist_total in artist_totals:
+                if artist_total['name'] == artist.name:
+                    this_artist = artist_total
+            if this_artist is None:
+                this_artist = { 'name' : artist.name, 'playcount' : int( artist.playcount ), 'tracks': [] }
+            else:
+                this_artist['playcount'] += int( artist.playcount )
+
+
+            for track in tracks.tracks:
+                if this_artist.name == track.artist.name:
+                    this_track = None
+                    for track_total in artist['tracks']:
+                        if track_total['name'] == track.name:
+                            this_track = track_total
+                    if this_track is None:
+                        this_track = { 'name' : track.name, 'playcount' : int( track.playcount ) }
+                        this_artist.tracks.append( this_track )
+                    else:
+                        this_track['playcount'] += int( track.playcount )
+
+        for artist in artist_totals:
+            artist_info = api.artist_getinfo( artist = artist['name'] )
+            artist_genre = artist_info.tags.tag[0].name;
+
+            this_genre = None
+            for genre in genres:
+                if genre['name'] == artist_genre:
+                    this_genre = genre
+            if this_genre is None:
+                this_genre = { 'name' : artist_genre, 'playcount' : artist['playcount'], 'artists' : [] }
+            else:
+                this_genre['playcount'] += artist['playcount']
+
+            this_genre['artists'].append( artist )
+
+        return return_data( request, {'chart' : { 'genres' : genres }} )
+
 def weekly_chart( request, week ):
     api, user = get_api_and_user( request )
 
-    genres = {}
     weekly_chart_list = api.user_getweeklychartlist( user = user.user.username )
 
     week = weekly_chart_list.charts[int( week )]
 
-    artists = api.user_getweeklyartistchart( user.user.username, week.start, week.end )
-    tracks = api.user_getweeklytrackchart( user.user.username, week.start, week.end )
-    for artist in artists.artists:
-        artist_info = api.artist_getinfo( artist = artist.name )
-        genre = artist_info.tags.tag[0].name;
-        artist_tracks = []
-        for track in tracks.tracks:
-            if track.artist.name == artist.name:
-                artist_tracks.append( { 'name': track.name, 'playcount' : int( track.playcount ) } )
-        if genres.get( genre ) is None:
-            genres[genre] = []
-        artist_dict = { 'name' : artist.name, 'playcount' : int( artist.playcount ), 'tracks': artist_tracks }
-        genres[genre].append( copy.deepcopy( artist_dict ) )
-    chart_genres = []
-    total_playcount = 0
-    for genre, artists in genres.iteritems():
-        playcount = 0
-        for artist in artists:
-            total_playcount += int( artist['playcount'] )
-            playcount += int( artist['playcount'] )
-        chart_genres.append( { 'name' : genre, 'artists' : artists, 'playcount' : playcount } )
-
-    return return_data( request, {"chart" : {'genres' : chart_genres, 'playcount' : total_playcount }} )
+    return return_chart_data( request, api, user, [week] )
 
 @login_required
 def weekly_chart_list( request ):
