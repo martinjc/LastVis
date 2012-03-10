@@ -54,16 +54,24 @@ def user_info( request, user_name = None ):
 def weekly_chart( request, week ):
     api, user = get_api_and_user( request )
 
-    genres = []
+    genres = {}
     weekly_chart_list = api.user_getweeklychartlist( user = user.user.username )
 
     week = weekly_chart_list.charts[int( week )]
 
     artists = api.user_getweeklyartistchart( user.user.username, week.start, week.end )
-
+    tracks = api.user_getweeklytrackchart( user.username, week.start, week.end )
     for artist in artists.artists:
         artist_info = api.artist_getinfo( artist = artist.name )
-        genres.append( copy.deepcopy( artist_info.to_dict() ) )
+        genre = artist_info.tags.tag[0];
+        artist_tracks = []
+        for track in tracks:
+            if track.artist.name == artist.name:
+                artist_tracks.append( { 'name': track.name, 'playcount' : track.playcount } )
+        if genres.get( genre ) is None:
+            genres[genre] = []
+        artist_dict = { 'name' : artist.name, 'playcount' : artist.playcount, tracks: artist_tracks }
+        genres[genre].append( copy.deepcopy( artist_dict ) )
         logger.info( genres )
 
     return return_data( request, {"chart" : genres} )
