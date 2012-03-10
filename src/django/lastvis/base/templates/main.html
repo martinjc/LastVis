@@ -4,9 +4,9 @@
     <div class="container">
         <img class="logo" src="{{STATIC_PATH}}img/logo.png">    
     </div>
-    <div class="container hero-unit">
+    <div class="container">
         <div class="row">
-            <div class="span4 offset4">
+            <div class="span6 offset3 hero-unit">
                 {% if lastfmuser %}
                     <h1>Welcome {{lastfmuser.user.username}}!</h1>
                     <p> Click <a href="{{ root_url }}auth/logout/">here</a> to logout<p>
