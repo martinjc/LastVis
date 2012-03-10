@@ -1,12 +1,15 @@
 import time
 import threading
+import logging
+
+logger = logging.getLogger( 'lastvis.custom' )
 
 class RateController( object ):
 
     def __init__( self, query_interval = None ):
 
         if query_interval is None:
-            queries_per_second = 1
+            queries_per_second = 5
             query_interval = 1 / float( queries_per_second )
 
         self.rate_control = { 'wait': query_interval,
@@ -23,7 +26,7 @@ class RateController( object ):
             monitor['timer'].join()
 
             while time.time() < monitor['earliest']:
-                print 'RATE_CONTROLLER: pausing'
+                logger.info( 'LOGGER: pausing *********' )
                 time.sleep( monitor['earliest'] - time.time() )
 
         earliest = time.time() + monitor['wait']
