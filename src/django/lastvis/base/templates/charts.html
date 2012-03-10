@@ -24,7 +24,7 @@
 {% block scripts %}
 <script>
     var json = $.getJSON('{{root_url}}api/weeklychartlist/');
-    alert(json);
+    alert($.parseJSON(json));
     for(var i in json.charts) {
         alert(json.charts[i]);
     }
