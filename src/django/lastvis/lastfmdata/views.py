@@ -61,9 +61,8 @@ def weekly_chart( request, week ):
 
     artists = api.user_getweeklyartistchart( user.user.username, week.start, week.end )
 
-    for i, artist in enumerate( artists.artists ):
+    for artist in artists.artists:
         artist_info = api.artist_getinfo( artist = artist.name )
-        genres[i] = artist_info.to_dict()
         genres.append( copy.deepcopy( artist_info.to_dict() ) )
         logger.info( genres )
 
