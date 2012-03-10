@@ -53,7 +53,14 @@ def weekly_chart_list( request ):
 
     api, user = get_api_and_user( request )
 
-    json = api.user_getweeklychartlist()
+    chart_list = api.user_getweeklychartlist()
+
+    callback = request.GET.get( 'callback', None )
+
+    if callback is None:
+        return HttpResponse( json.dumps( chart_list ), mimetype = 'application/json' )
+    else:
+        return HttpResponse( callback + '(' + json.dumps( chart_list ) + ')', mimetype = 'application/javascript' )
 
 @csrf_exempt
 @requires_csrf_token
