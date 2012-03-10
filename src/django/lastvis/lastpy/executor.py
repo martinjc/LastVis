@@ -79,6 +79,7 @@ def bind_api( **config ):
             # Query the cache if one is available
             # and this request uses a GET method.
             if self.use_cache and self.api.cache and self.method == 'GET':
+                logger.info( self.parameters )
                 store_url = '%s?%s' % ( url, urllib.urlencode( self.parameters ).encode( 'utf-8' ) )
                 cache_result = self.api.cache.get( store_url )
                 # if cache result found and not expired, return it
