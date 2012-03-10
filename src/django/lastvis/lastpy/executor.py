@@ -83,17 +83,17 @@ def bind_api( **config ):
                 cache_result = self.api.cache.get( store_url )
                 # if cache result found and not expired, return it
                 if cache_result:
-                    logger.info('EXECUTOR: found in cache')
+                    logger.info( 'EXECUTOR: found in cache' )
                     if isinstance( cache_result, Model ):
                         cache_result.restore_api( self.api )
                     return cache_result
                 else:
-                    logger.info('EXECUTOR: not found in cache, hitting last.fm')
+                    logger.info( 'EXECUTOR: not found in cache, hitting last.fm' )
 
             # parameters on url if GET, in post data if POST
             self.parameters['format'] = u'json'
             if self.method == 'GET':
-                url = '%s?%s' % ( url, urllib.urlencode( self.parameters ) )
+                url = '%s?%s' % ( url, urllib.urlencode( self.parameters ).encode( 'utf-8' ) )
                 self.post_data = urllib.urlencode( {} )
             else:
                 self.headers['Content-type'] = u'application/x-www-form-urlencoded'
@@ -101,7 +101,7 @@ def bind_api( **config ):
 
             self.headers['User-Agent'] = 'LastVis:5e1aff6b88998e05c176abbd5118d6ba'
 
-            logger.info('EXECUTOR: retrieving: %s' % url)
+            logger.info( 'EXECUTOR: retrieving: %s' % url )
             retries_performed = 0
             while retries_performed < self.retry_count + 1:
 
@@ -128,7 +128,7 @@ def bind_api( **config ):
             conn.close()
 
             if self.use_cache and self.api.cache and self.method == 'GET' and result:
-                logger.info('EXECUTOR: storing result')
+                logger.info( 'EXECUTOR: storing result' )
                 self.api.cache.store( store_url, result )
 
             return result
