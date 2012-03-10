@@ -23,13 +23,15 @@
 
 {% block scripts %}
 <script>
-    $('#date-select').datepicker();
+    function select_week(dateText, inst) {
+        alert(dateText);
+    }
+
+    $('#date-select').datepicker({
+        onSelect: select_week(dateText, inst),
+    });
     var json = $.getJSON('{{root_url}}api/weeklychartlist/', function(data) {
-        alert(data);
-        alert(JSON.stringify(data));
         for(var i in data.charts) {
-            start = data.charts[i].start
-            alert(start);
         }
     });
 </script>
