@@ -22,7 +22,7 @@ urlpatterns = patterns( 'lastvis.lastfmdata.views',
 
     url( r'charts/(?P<year>\d+)/$', view = yearly_chart, name = 'yearly_chart' ),
     url( r'charts/(?P<year>\d+)/(?P<month>\d+)/$', view = monthly_chart, name = 'monthly_chart' ),
-    url( r'weeklychart/(?P<week>\d+)/$', view = weekly_chart, name = 'weekly_chart' ),
+    url( r'weeklychart/(?P<week>\w+)/$', view = weekly_chart, name = 'weekly_chart' ),
 
     url( r'test/$', view = test, name = 'api_test' ),
 

@@ -66,9 +66,6 @@ def bind_api( **config ):
 
         def execute( self ):
 
-            # pause if necessary to observe API rate limiting
-            self.api.rate_controller.control_rate()
-
             # build the url
             url = self.api.scheme + self.api.host + self.api.root
 
@@ -90,6 +87,8 @@ def bind_api( **config ):
                     return cache_result
                 else:
                     logger.info( 'EXECUTOR: not found in cache, hitting last.fm' )
+                    # pause if necessary to observe API rate limiting
+                    self.api.rate_controller.control_rate()
 
             # parameters on url if GET, in post data if POST
             self.parameters['format'] = u'json'
