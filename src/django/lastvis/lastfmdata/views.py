@@ -28,7 +28,7 @@ def get_api_and_user( request ):
     if session_key is not None:
 
             auth = LastpyAuthHandler( request.session['session_key'], API_KEY, API_SECRET )
-            cache = DjangoDBCache( timeout = 60 )
+            cache = DjangoDBCache( timeout = 3600 )
             api = API( auth, cache = cache )
 
     user = request.user
@@ -47,6 +47,17 @@ def user_info( request, user_name = None ):
         return_user = api.user_getinfo( user = user_name )
 
     return HttpResponse( json.dumps( { 'user' : return_user.to_dict() } ), mimetype = 'application/json' )
+
+def weeklychart( request, week ):
+    api, user = get_api_and_user( request )
+
+    weekly_chart_list = api.user_getweeklychartlist( user = user.user.username )
+
+    week = weekly_chart_list[week]
+
+    artists = api.user_getweeklyartistchart( user.user.username, week.start, week.end )
+
+    return return_data( request, artists.to_dict() )
 
 @login_required
 def weekly_chart_list( request ):

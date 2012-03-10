@@ -20,6 +20,8 @@ urlpatterns = patterns( 'lastvis.lastfmdata.views',
 
     url( r'weeklychartlist/$', view = weekly_chart_list, name = 'weekly_chart_list' ),
 
+    url( r'weeklychart/(?P<week>\d+)/$', view = weekly_chart, name = 'weekly_chart' ),
+
     url( r'test/$', view = test, name = 'api_test' ),
 
  )
