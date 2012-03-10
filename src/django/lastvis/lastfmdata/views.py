@@ -66,7 +66,6 @@ def weekly_chart( request, week ):
         genre = artist_info.tags.tag[0].name;
         artist_tracks = []
         for track in tracks.tracks:
-            logger.info( 'TRACK ' + track.artist.name + ' == ' + artist.name )
             if track.artist.name == artist.name:
                 artist_tracks.append( { 'name': track.name, 'playcount' : track.playcount } )
         if genres.get( genre ) is None:
@@ -74,8 +73,11 @@ def weekly_chart( request, week ):
         artist_dict = { 'name' : artist.name, 'playcount' : artist.playcount, 'tracks': artist_tracks }
         genres[genre].append( copy.deepcopy( artist_dict ) )
     chart_genres = []
-    for genre in genres:
-        chart_genres.append( genre )
+    for genre, artists in genres.iteritems:
+        playcount = 0
+        for artist in artists:
+            playcount += artist['playcount']
+        chart_genres.append( { 'name' : genre, 'artists' : artists, 'playcount' : playcount } )
 
     return return_data( request, {"chart" : {'genres' : chart_genres }} )
 
