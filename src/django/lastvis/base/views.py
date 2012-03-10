@@ -49,3 +49,8 @@ def main( request ):
             return render_to_response( 'main.html', { 'lastfmuser' : lastfm_user, 'root_url' : ROOT_URL }, context_instance = RequestContext( request ) )
         else:
             return render_to_response( 'main.html', { 'root_url' : ROOT_URL }, context_instance = RequestContext( request ) )
+
+
+def processing_test( request ):
+
+    return render_to_response( 'test_processing.html', { 'root_url' : ROOT_URL }, context_instance = RequestContext( request ) )

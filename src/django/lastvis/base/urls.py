@@ -5,6 +5,10 @@ urlpatterns = patterns( 'base.views',
 
     #
     # main page
-    url( r'^$', view=main, name='base_main' ),
+    url( r'^$', view = main, name = 'base_main' ),
 
-)
+    #
+    # main page
+    url( r'^processing/$', view = processing_test, name = 'base_processing' ),
+
+ )
