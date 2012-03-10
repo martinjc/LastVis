@@ -113,7 +113,7 @@ def return_chart_data( request, api, user, weeks, ):
                             this_track = track_total
                     if this_track is None:
                         this_track = { 'name' : track.name, 'playcount' : int( track.playcount ) }
-                        this_artist.tracks.append( this_track )
+                        this_artist['tracks'].append( this_track )
                     else:
                         this_track['playcount'] += int( track.playcount )
 
