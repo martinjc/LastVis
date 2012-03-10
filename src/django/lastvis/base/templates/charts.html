@@ -37,19 +37,15 @@
         }
         max = parseInt(max) * 1000;
         min = parseInt(min) * 1000;
-        alert(max);
-        alert(min);
         $('#date-select').datepicker({
               dateFormat : "@",
               maxDate : max.toString(),
               minDate : min.toString(),
               onSelect : function(dateText, inst) {
-                  alert(dateText);
                   var date = parseInt(dateText) / 1000;
-                  alert(date);
                   for(var i in data.charts) {
                       if(date >= data.charts[i].start && date <= data.charts[i].end) {
-                          alert(data.charts[i].start + ' ' + data.charts[i].end );
+                          alert([i]);
                       }
                   } 
               }
