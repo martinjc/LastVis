@@ -18,6 +18,7 @@ ROOT_URL = getattr( settings, 'ROOT_URL', 'http://127.0.0.1:8000/' )
 API_KEY = getattr( settings, 'API_KEY', '' )
 API_SECRET = getattr( settings, 'API_SECRET', '' )
 
+from test_json import chart
 
 def get_api_and_user( request ):
 
@@ -44,3 +45,7 @@ def user_info( request, user_name = None ):
         return_user = api.user_getinfo( user = user_name )
 
     return HttpResponse( json.dumps( { 'user' : return_user.to_dict() } ), mimetype = 'application/json' )
+
+def test( request ):
+
+    return HttpResponse( json.dumps( chart ), mimetype = 'application/json' )
