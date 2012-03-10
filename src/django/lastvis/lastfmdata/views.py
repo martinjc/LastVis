@@ -58,8 +58,8 @@ def yearly_chart( request, year ):
     weekly_chart_list = api.user_getweeklychartlist( user = user.user.username )
     weeks = []
 
-    year_start = datetime.datetime( year, 01, 01, 00, 00 )
-    year_end = datetime.datetime( year, 12, 31, 23, 59 )
+    year_start = datetime.datetime( int( year ), 01, 01, 00, 00 )
+    year_end = datetime.datetime( int( year ), 12, 31, 23, 59 )
 
     year_start_epoch = time.mktime( year_start.timetuple() )
     year_end_epoch = time.mktime( year_end.timetuple() )
@@ -75,8 +75,8 @@ def monthly_chart( request, year, month ):
     weekly_chart_list = api.user_getweeklychartlist( user = user.user.username )
     weeks = []
 
-    month_start = datetime.datetime( year, month, 01, 00, 00 )
-    month_end = datetime.datetime( year, month, 31, 23, 59 )
+    month_start = datetime.datetime( int( year ), int( month ), 01, 00, 00 )
+    month_end = datetime.datetime( int( year ), int( month ), 31, 23, 59 )
 
     month_start_epoch = time.mktime( month_start.timetuple() )
     month_end_epoch = time.mktime( month_end.timetuple() )
