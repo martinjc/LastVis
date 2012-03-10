@@ -139,8 +139,11 @@ def return_chart_data( request, api, user, weeks, ):
 
             this_genre['artists'].append( artist )
 
+    total_playcount = 0
+    for genre in genres:
+        total_playcount += genre['playcount']
 
-    return return_data( request, {'chart' : { 'genres' : genres }} )
+    return return_data( request, {'chart' : { 'genres' : genres, 'playcount' : total_playcount }} )
 
 def weekly_chart( request, week ):
     api, user = get_api_and_user( request )
