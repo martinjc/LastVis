@@ -8,9 +8,9 @@
                 <div class="control-group">
                     <label class="control-label" for="date-select">Select Chart Date</label>
                     <div class="controls">
-                        <select id="date-select">
+                        <div id="date-select">
                             
-                        </select>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -23,6 +23,7 @@
 
 {% block scripts %}
 <script>
+    $('#date-select').datepicker();
     var json = $.getJSON('{{root_url}}api/weeklychartlist/', function(data) {
         alert(data);
         alert(JSON.stringify(data));
