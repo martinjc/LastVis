@@ -27,12 +27,23 @@
         alert(dateText);
     }
 
-    $('#date-select').datepicker({
-        onSelect: select_week(),
-    });
+
     var json = $.getJSON('{{root_url}}api/weeklychartlist/', function(data) {
+        var max = 0;
+        var min = 10000000000;
         for(var i in data.charts) {
+            if(data.charts[i].start < min) {
+                min = data.charts[i].start; 
+            }
+            if(data.charts[i].end > max) {
+                max = data.charts[i].end;
+            }
         }
-    });
+       $('#date-select').datepicker({
+           onSelect: select_week(),
+           dateFormat : "@",
+           maxDate : max,
+           minDate : min
+       });
 </script>
 {% endblock %}
