@@ -60,7 +60,7 @@ def weekly_chart( request, week ):
     week = weekly_chart_list.charts[int( week )]
 
     artists = api.user_getweeklyartistchart( user.user.username, week.start, week.end )
-    tracks = api.user_getweeklytrackchart( user.username, week.start, week.end )
+    tracks = api.user_getweeklytrackchart( user.user.username, week.start, week.end )
     for artist in artists.artists:
         artist_info = api.artist_getinfo( artist = artist.name )
         genre = artist_info.tags.tag[0];
