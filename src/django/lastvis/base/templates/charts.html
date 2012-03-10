@@ -38,13 +38,15 @@
                 max = data.charts[i].end;
             }
         }
+        max = parseInt(max) * 1000;
+        min = parseInt(min) * 1000;
         alert(max);
         alert(min);
        $('#date-select').datepicker({
            onSelect: select_week(),
            dateFormat : "@",
-           maxDate : max * 1000,
-           minDate : min * 1000,
+           maxDate : max,
+           minDate : min,
        });
        });
 </script>
