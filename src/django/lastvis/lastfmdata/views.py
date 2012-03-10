@@ -94,7 +94,7 @@ def monthly_chart( request, year, month ):
     logger.info( 'month looking for: %s,%s' % ( month_start_epoch, month_end_epoch ) )
     for week in weekly_chart_list.charts:
         logger.info( 'week: %s,%s' % ( week.start, week.end ) )
-        if week.start > month_start_epoch and week.start < month_end_epoch and week.end > month_start_epoch and week.end < month_end_epoch:
+        if week.start >= month_start_epoch and week.end <= month_end_epoch:
             weeks.append( week )
 
     return return_chart_data( request, api, user, weeks )
