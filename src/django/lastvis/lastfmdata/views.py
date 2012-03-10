@@ -58,9 +58,9 @@ def weekly_chart_list( request ):
     callback = request.GET.get( 'callback', None )
 
     if callback is None:
-        return HttpResponse( json.dumps( chart_list ), mimetype = 'application/json' )
+        return HttpResponse( json.dumps( chart_list.to_dict() ), mimetype = 'application/json' )
     else:
-        return HttpResponse( callback + '(' + json.dumps( chart_list ) + ')', mimetype = 'application/javascript' )
+        return HttpResponse( callback + '(' + json.dumps( chart_list.to_dict() ) + ')', mimetype = 'application/javascript' )
 
 
 def test( request ):
