@@ -73,9 +73,11 @@ def weekly_chart( request, week ):
             genres[genre] = []
         artist_dict = { 'name' : artist.name, 'playcount' : artist.playcount, 'tracks': artist_tracks }
         genres[genre].append( copy.deepcopy( artist_dict ) )
-        logger.info( genres )
+    chart_genres = []
+    for genre in genres:
+        chart_genres.append( genre )
 
-    return return_data( request, {"chart" : {'genres' : genres }} )
+    return return_data( request, {"chart" : {'genres' : chart_genres }} )
 
 @login_required
 def weekly_chart_list( request ):
