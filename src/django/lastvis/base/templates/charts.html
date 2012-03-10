@@ -43,8 +43,8 @@
        $('#date-select').datepicker({
            onSelect: select_week(),
            dateFormat : "@",
-           maxDate : max,
-           minDate : min
+           maxDate : max * 1000,
+           minDate : min * 1000,
        });
        });
 </script>
