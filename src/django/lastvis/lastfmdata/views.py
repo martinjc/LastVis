@@ -55,20 +55,19 @@ def weekly_chart_list( request ):
 
     chart_list = api.user_getweeklychartlist( user = user.user.username )
 
-    callback = request.GET.get( 'callback', None )
-
-    if callback is None:
-        return HttpResponse( json.dumps( chart_list.to_dict() ), mimetype = 'application/json' )
-    else:
-        return HttpResponse( callback + '(' + json.dumps( chart_list.to_dict() ) + ')', mimetype = 'application/javascript' )
+    return_data( request, chart_list.to_dict() )
 
 
 def test( request ):
 
+    return return_data( request, { "chart" : chart } )
+
+
+def return_data( request, data_dict ):
 
     callback = request.GET.get( 'callback', None )
 
     if callback is None:
-        return HttpResponse( json.dumps( { "chart": chart } ), mimetype = 'application/json' )
+        return HttpResponse( json.dumps( data_dict ), mimetype = 'application/json' )
     else:
-        return HttpResponse( callback + '(' + json.dumps( { "chart": chart } ) + ')', mimetype = 'application/javascript' )
+        return HttpResponse( callback + '(' + json.dumps( data_dict ) + ')', mimetype = 'application/javascript' )
