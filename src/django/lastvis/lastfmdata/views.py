@@ -76,7 +76,7 @@ def weekly_chart( request, week ):
     for genre, artists in genres.iteritems():
         playcount = 0
         for artist in artists:
-            playcount += artist['playcount']
+            playcount += int( artist['playcount'] )
         chart_genres.append( { 'name' : genre, 'artists' : artists, 'playcount' : playcount } )
 
     return return_data( request, {"chart" : {'genres' : chart_genres }} )
