@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <!-- <img src="{{STATIC_PATH}}img/logo.png"> -->
-    {% if lastfmuser %}
-        <h1>Welcome {{lastfmuser.user.username}}!</h1>
-        <p> Click <a href="{{ root_url }}auth/logout/">here</a> to logout<p>
-    {% else %}
-        <h1>Welcome!</h1>
-        <p> Click <a href="{{ root_url }}auth/">login with last.fm</a> to begin.</p>
-    {% endif %}
+    <div class="container">
+        <img src="{{STATIC_PATH}}img/logo.png">    
+    </div>
+    <div class="container hero-unit">
+        {% if lastfmuser %}
+            <h1>Welcome {{lastfmuser.user.username}}!</h1>
+            <p> Click <a href="{{ root_url }}auth/logout/">here</a> to logout<p>
+        {% else %}
+            <h1>Welcome!</h1>
+            <p> Click <a href="{{ root_url }}auth/">login with last.fm</a> to begin.</p>
+        {% endif %}
+    </div>
 {% endblock %}
