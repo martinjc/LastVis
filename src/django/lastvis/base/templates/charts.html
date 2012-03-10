@@ -23,11 +23,11 @@
 
 {% block scripts %}
 <script>
-    var json = $.getJSON('{{root_url}}api/weeklychartlist/');
-    alert(json);
-    alert(json['charts']);
-    for(var i in json.charts) {
-        alert(json.charts[i]);
-    }
+    var json = $.getJSON('{{root_url}}api/weeklychartlist/', function(data) {
+        alert(data);
+        for(var i in data.charts) {
+            alert(data.charts[i]);
+        }
+    });
 </script>
 {% endblock %}
