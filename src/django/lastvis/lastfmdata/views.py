@@ -127,10 +127,13 @@ def return_chart_data( request, api, user, weeks, ):
                     this_genre = genre
             if this_genre is None:
                 this_genre = { 'name' : artist_genre, 'playcount' : artist['playcount'], 'artists' : [] }
+                genres.apped( this_genre )
             else:
                 this_genre['playcount'] += artist['playcount']
 
             this_genre['artists'].append( artist )
+
+
 
         return return_data( request, {'chart' : { 'genres' : genres }} )
 
