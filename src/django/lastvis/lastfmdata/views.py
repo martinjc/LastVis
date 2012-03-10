@@ -63,7 +63,12 @@ def yearly_chart( request, year ):
 
     year_start_epoch = time.mktime( year_start.timetuple() )
     year_end_epoch = time.mktime( year_end.timetuple() )
+
+    logger.info( year_start_epoch )
+    logger.info( year_end_epoch )
     for week in weekly_chart_list.charts:
+        logger.info( week.start )
+        logger.info( week.end )
         if week.start > year_start_epoch and week.start < year_end_epoch and week.end > year_start_epoch and week.end < year_end_epoch:
             weeks.append( week )
 
