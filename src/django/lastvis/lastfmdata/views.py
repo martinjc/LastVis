@@ -73,7 +73,7 @@ def weekly_chart( request, week ):
         artist_dict = { 'name' : artist.name, 'playcount' : artist.playcount, 'tracks': artist_tracks }
         genres[genre].append( copy.deepcopy( artist_dict ) )
     chart_genres = []
-    for genre, artists in genres.iteritems:
+    for genre, artists in genres.iteritems():
         playcount = 0
         for artist in artists:
             playcount += artist['playcount']
