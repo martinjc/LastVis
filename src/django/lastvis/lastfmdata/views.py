@@ -65,7 +65,7 @@ def weekly_chart( request, week ):
         artist_info = api.artist_getinfo( artist = artist.name )
         genre = artist_info.tags.tag[0].name;
         artist_tracks = []
-        for track in tracks:
+        for track in tracks.tracks:
             logger.info( 'TRACK ' + track.artist.name + ' == ' + artist.name )
             if track.artist.name == artist.name:
                 artist_tracks.append( { 'name': track.name, 'playcount' : track.playcount } )
