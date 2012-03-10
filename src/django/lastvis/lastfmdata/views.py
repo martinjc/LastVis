@@ -53,7 +53,7 @@ def weekly_chart_list( request ):
 
     api, user = get_api_and_user( request )
 
-    chart_list = api.user_getweeklychartlist( user = user.name )
+    chart_list = api.user_getweeklychartlist( user = user.user.name )
 
     callback = request.GET.get( 'callback', None )
 
