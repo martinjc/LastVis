@@ -28,7 +28,7 @@
     }
 
     $('#date-select').datepicker({
-        onSelect: select_week(dateText, inst),
+        onSelect: select_week(),
     });
     var json = $.getJSON('{{root_url}}api/weeklychartlist/', function(data) {
         for(var i in data.charts) {
