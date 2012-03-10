@@ -52,6 +52,7 @@ def user_info( request, user_name = None ):
 
     return HttpResponse( json.dumps( { 'user' : return_user.to_dict() } ), mimetype = 'application/json' )
 
+@login_required
 def yearly_chart( request, year ):
     api, user = get_api_and_user( request )
 
@@ -70,6 +71,7 @@ def yearly_chart( request, year ):
 
     return return_chart_data( request, api, user, weeks )
 
+@login_required
 def monthly_chart( request, year, month ):
     api, user = get_api_and_user( request )
 
@@ -93,6 +95,7 @@ def monthly_chart( request, year, month ):
 
     return return_chart_data( request, api, user, weeks )
 
+@login_required
 def return_chart_data( request, api, user, weeks, ):
     genres = []
 
@@ -152,6 +155,7 @@ def return_chart_data( request, api, user, weeks, ):
 
     return return_data( request, {'chart' : { 'genres' : genres, 'playcount' : total_playcount }} )
 
+@login_required
 def weekly_chart( request, week ):
     api, user = get_api_and_user( request )
 

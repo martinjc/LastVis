@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="span4">
+                <h1>Welcome {{lastfmuser.user.username}}!</h1>
+                <div class="control-group">
+                    <label class="control-label" for="date-select">Select Chart Date</label>
+                    <div class="controls">
+                        <select id="date-select">
+                            
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="span8">
+                <canvas></canvas>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    
+</script>
+{% endblock %}

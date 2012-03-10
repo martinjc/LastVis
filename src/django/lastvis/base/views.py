@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 from lastvis.lastfmauth.models import LastFMUser
 from lastvis.lastpy import LastpyAuthHandler, API
@@ -49,6 +50,12 @@ def main( request ):
             return render_to_response( 'main.html', { 'lastfmuser' : lastfm_user, 'root_url' : ROOT_URL }, context_instance = RequestContext( request ) )
         else:
             return render_to_response( 'main.html', { 'root_url' : ROOT_URL }, context_instance = RequestContext( request ) )
+
+@login_required
+def weekly_charts( request ):
+    user = request.user
+    lastfm_user = user.get_profile()
+    return render_to_response( 'charts.html', { 'lastfmuser' : lastfm_user, 'root_url' : ROOT_URL }, context_instance = RequestContext( request ) )
 
 
 def processing_test( request ):
