@@ -48,7 +48,7 @@ def user_info( request, user_name = None ):
 
     return HttpResponse( json.dumps( { 'user' : return_user.to_dict() } ), mimetype = 'application/json' )
 
-def weeklychart( request, week ):
+def weekly_chart( request, week ):
     api, user = get_api_and_user( request )
 
     weekly_chart_list = api.user_getweeklychartlist( user = user.user.username )
