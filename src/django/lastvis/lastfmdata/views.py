@@ -106,7 +106,7 @@ def return_chart_data( request, api, user, weeks, ):
 
 
             for track in tracks.tracks:
-                if this_artist.name == track.artist.name:
+                if this_artist['name'] == track.artist.name:
                     this_track = None
                     for track_total in artist['tracks']:
                         if track_total['name'] == track.name:
