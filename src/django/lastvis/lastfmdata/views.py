@@ -62,4 +62,4 @@ def test( request ):
 
     callback = request.GET['callback']
 
-    return HttpResponse( 'callback(' + json.dumps( { "chart": chart } ) + ')', mimetype = 'application/javascript' )
+    return HttpResponse( callback + '(' + json.dumps( { "chart": chart } ) + ')', mimetype = 'application/javascript' )
