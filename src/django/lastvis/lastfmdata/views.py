@@ -55,7 +55,7 @@ def weekly_chart_list( request ):
 
     chart_list = api.user_getweeklychartlist( user = user.user.username )
 
-    return_data( request, chart_list.to_dict() )
+    return return_data( request, chart_list.to_dict() )
 
 
 def test( request ):
