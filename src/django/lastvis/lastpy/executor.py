@@ -48,7 +48,7 @@ def bind_api( **config ):
                     continue
 
                 try:
-                    self.parameters[ self.allowed_params[ idx ] ] = arg
+                    self.parameters[ self.allowed_params[ idx ] ] = arg.encode( 'utf-8' )
                 except IndexError:
                     raise LastpyError( 'Too many parameters supplied!' )
 
@@ -59,7 +59,7 @@ def bind_api( **config ):
                 if k in self.parameters:
                     raise LastpyError( 'Multiple values for parameter %s supplied!' % k )
 
-                self.parameters[k] = arg
+                self.parameters[k] = arg.encode( 'utf-8' )
 
             # add the method to the parameters
             self.parameters['method'] = self.endpoint
