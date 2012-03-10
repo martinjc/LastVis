@@ -70,7 +70,7 @@ def weekly_chart( request, week ):
                 artist_tracks.append( { 'name': track.name, 'playcount' : track.playcount } )
         if genres.get( genre ) is None:
             genres[genre] = []
-        artist_dict = { 'name' : artist.name, 'playcount' : artist.playcount, tracks: artist_tracks }
+        artist_dict = { 'name' : artist.name, 'playcount' : artist.playcount, 'tracks': artist_tracks }
         genres[genre].append( copy.deepcopy( artist_dict ) )
         logger.info( genres )
 
