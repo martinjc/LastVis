@@ -65,6 +65,7 @@ def weekly_chart( request, week ):
         artist_info = api.artist_getinfo( artist = artist.name )
         logger.info( artist_info.to_dict() )
         genres.append( artist_info.to_dict() )
+        logger.info( genres )
 
     return return_data( request, {"chart" : genres} )
 
