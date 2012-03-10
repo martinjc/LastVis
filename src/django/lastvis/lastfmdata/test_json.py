@@ -1,4 +1,4 @@
-chart = { "genres": [
+chart = { "playcount" : 71, "genres": [
     {"playcount": 22, "name": "grunge", "artists": [
         {"tracks": [
             {"playcount": 1, "name": "Breed"},
