@@ -134,8 +134,7 @@ def return_chart_data( request, api, user, weeks, ):
             this_genre['artists'].append( artist )
 
 
-
-        return return_data( request, {'chart' : { 'genres' : genres }} )
+    return return_data( request, {'chart' : { 'genres' : genres }} )
 
 def weekly_chart( request, week ):
     api, user = get_api_and_user( request )
