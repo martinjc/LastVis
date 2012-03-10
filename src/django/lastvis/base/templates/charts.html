@@ -23,6 +23,7 @@
 
 {% block scripts %}
 <script>
-    
+    var json = $.getJSON('{{root_url}}api/weeklychartlist/');
+    alert(json);
 </script>
 {% endblock %}
