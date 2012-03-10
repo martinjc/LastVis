@@ -91,7 +91,11 @@ def monthly_chart( request, year, month ):
 
     month_start_epoch = time.mktime( month_start.timetuple() )
     month_end_epoch = time.mktime( month_end.timetuple() )
+    logger.info( month_start_epoch )
+    logger.info( month_end_epoch )
     for week in weekly_chart_list.charts:
+        logger.info( week.start )
+        logger.info( week.end )
         if week.start > month_start_epoch and week.start < month_end_epoch and week.end > month_start_epoch and week.end < month_end_epoch:
             weeks.append( week )
 
