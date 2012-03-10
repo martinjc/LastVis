@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt, requires_csrf_token
 
 from lastvis.lastfmauth.models import LastFMUser
 from lastvis.lastpy import LastpyAuthHandler, API
@@ -56,6 +56,7 @@ def weekly_chart_list( request ):
     json = api.user_getweeklychartlist()
 
 @csrf_exempt
+@requires_csrf_token
 def test( request ):
 
     return HttpResponse( json.dumps( chart ), mimetype = 'application/json' )
