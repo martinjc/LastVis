@@ -18,6 +18,8 @@ urlpatterns = patterns( 'lastvis.lastfmdata.views',
     #
     url( r'user/(?P<user_name>\w+)/$', view = user_info, name = 'user_info' ),
 
+    url( r'weeklychartlist/$', view = weekly_chart_list, name = 'weekly_chart_list' ),
+
     url( r'test/$', view = test, name = 'api_test' ),
 
  )
