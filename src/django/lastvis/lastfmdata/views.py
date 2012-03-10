@@ -95,6 +95,7 @@ def return_chart_data( request, api, user, weeks, ):
         artists = api.user_getweeklyartistchart( user.user.username, week.start, week.end )
         tracks = api.user_getweeklytrackchart( user.user.username, week.start, week.end )
         for artist in artists.artists:
+            logger.info( artist.name )
             this_artist = None
             for artist_total in artist_totals:
                 if artist_total['name'] == artist.name:
@@ -107,6 +108,7 @@ def return_chart_data( request, api, user, weeks, ):
 
             for track in tracks.tracks:
                 if this_artist['name'] == track.artist.name:
+                    logger.info( track.name )
                     this_track = None
                     for track_total in this_artist['tracks']:
                         if track_total['name'] == track.name:
