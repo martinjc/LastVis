@@ -10,6 +10,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
+from django.views.decorators.csrf import csrf_exempt
+
 from lastvis.lastfmauth.models import LastFMUser
 from lastvis.lastpy import LastpyAuthHandler, API
 from cache import DjangoDBCache
@@ -46,6 +48,14 @@ def user_info( request, user_name = None ):
 
     return HttpResponse( json.dumps( { 'user' : return_user.to_dict() } ), mimetype = 'application/json' )
 
+@login_required
+def weekly_chart_list( request ):
+
+    api, user = get_api_and_user( request )
+
+    json = api.user_getweeklychartlist()
+
+@csrf_exempt
 def test( request ):
 
     return HttpResponse( json.dumps( chart ), mimetype = 'application/json' )
