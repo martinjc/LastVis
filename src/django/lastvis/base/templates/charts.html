@@ -15,13 +15,14 @@
                 </div>
             </div>
             <div class="span8">
-                <canvas data-processing-sources="{{STATIC_PATH}}processing/RGBCube.pde"></canvas>
+                <canvas id="viscanvas" data-processing-sources="{{STATIC_PATH}}processing/TestJQuery.pde {{STATIC_PATH}}processing/Slice.pde {{STATIC_PATH}}processing/LinearAlg.pde"></canvas>
             </div>
         </div>
     </div>
 {% endblock %}
 
 {% block scripts %}
+<script src="{{STATIC_PATH}}js/jquery.json2xml.js"></script>
 <script>
 
     $.getJSON('{{root_url}}api/weeklychartlist/', function(data) {
@@ -46,6 +47,15 @@
                   for(var i in data.charts) {
                       if(date >= data.charts[i].start && date <= data.charts[i].end) {
                           alert([i]);
+                          var pjs = Processing.getInstanceById('viscanvas');
+                          var chart_url = '{{root_url}}api/weeklychart/' + i + '/';
+                          $.getJSON(chart_url, function(chart_data) {
+                              var options = {
+                                  formatOutput = true,
+                              };
+                              var xmlData = $.json2xml(chart_data.chart, options);
+                              pjs.addData(xmlData);
+                          });
                       }
                   } 
               }
@@ -53,4 +63,5 @@
     });
 </script>
 <script src="{{STATIC_PATH}}js/processing-1.3.6.js"></script>
+
 {% endblock %}
