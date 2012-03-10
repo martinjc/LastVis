@@ -122,8 +122,10 @@ def return_chart_data( request, api, user, weeks, ):
 
         for artist in artist_totals:
             artist_info = api.artist_getinfo( artist = artist['name'] )
-            logger.info( artist_info.to_dict() )
-            artist_genre = artist_info.tags.tag[0].name;
+            if hasattr( artist_info.tags, 'tag' ):
+                artist_genre = artist_info.tags.tag[0].name;
+            else:
+                artist_genre = 'unknown'
 
             this_genre = None
             for genre in genres:
