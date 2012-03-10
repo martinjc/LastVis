@@ -32,7 +32,7 @@ def get_api_and_user( request ):
     if session_key is not None:
 
             auth = LastpyAuthHandler( request.session['session_key'], API_KEY, API_SECRET )
-            cache = DjangoDBCache( timeout = 3600 )
+            cache = DjangoDBCache( timeout = 60 * 60 * 24 )
             api = API( auth, cache = cache )
 
     user = request.user
@@ -64,12 +64,8 @@ def yearly_chart( request, year ):
     year_start_epoch = time.mktime( year_start.timetuple() )
     year_end_epoch = time.mktime( year_end.timetuple() )
 
-    logger.info( year_start_epoch )
-    logger.info( year_end_epoch )
     for week in weekly_chart_list.charts:
-        logger.info( week.start )
-        logger.info( week.end )
-        if week.start > year_start_epoch and week.start < year_end_epoch and week.end > year_start_epoch and week.end < year_end_epoch:
+        if int( week.start ) >= int( year_start_epoch ) and int( week.end ) <= int( year_end_epoch ):
             weeks.append( week )
 
     return return_chart_data( request, api, user, weeks )
@@ -91,9 +87,7 @@ def monthly_chart( request, year, month ):
 
     month_start_epoch = time.mktime( month_start.timetuple() )
     month_end_epoch = time.mktime( month_end.timetuple() )
-    logger.info( 'month looking for: %s,%s' % ( month_start_epoch, month_end_epoch ) )
     for week in weekly_chart_list.charts:
-        logger.info( 'week: %s,%s' % ( week.start, week.end ) )
         if int( week.start ) >= int( month_start_epoch ) and int( week.end ) <= int( month_end_epoch ):
             weeks.append( week )
 
