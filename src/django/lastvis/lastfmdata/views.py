@@ -59,4 +59,4 @@ def weekly_chart_list( request ):
 @requires_csrf_token
 def test( request ):
 
-    return HttpResponse( json.dumps( chart ), mimetype = 'application/json' )
+    return HttpResponse( json.dumps( { "chart": chart } ), mimetype = 'application/json' )
