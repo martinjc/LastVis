@@ -102,6 +102,7 @@ def return_chart_data( request, api, user, weeks, ):
                     this_artist = artist_total
             if this_artist is None:
                 this_artist = { 'name' : artist.name, 'playcount' : int( artist.playcount ), 'tracks': [] }
+                artist_totals.append( this_artist )
             else:
                 this_artist['playcount'] += int( artist.playcount )
 
