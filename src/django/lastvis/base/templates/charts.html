@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="span8">
-                <canvas></canvas>
+                <canvas data-processing-sources="{{STATIC_PATH}}processing/RGBCube.pde"></canvas>
             </div>
         </div>
     </div>
@@ -56,4 +56,5 @@
         });
     });
 </script>
+<script src="{{STATIC_PATH}}js/processing-1.3.6.js"></script>
 {% endblock %}
