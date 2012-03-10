@@ -22,6 +22,8 @@ API_SECRET = getattr( settings, 'API_SECRET', '' )
 
 from test_json import chart
 
+logger = logging.getLogger( 'lastvis.custom' )
+
 def get_api_and_user( request ):
 
     session_key = request.session.get( 'session_key', None )
@@ -59,10 +61,11 @@ def weekly_chart( request, week ):
     artists = api.user_getweeklyartistchart( user.user.username, week.start, week.end )
 
     for artist in artists.artists:
+        logger.info( artist.name )
         artist_info = api.artist_getinfo( artist = artist.name )
         genres.append( artist_info.to_dict() )
 
-    return return_data( request, {"chart" : genres} )
+    return return_data( request, {"chart" : artists} )
 
 @login_required
 def weekly_chart_list( request ):
