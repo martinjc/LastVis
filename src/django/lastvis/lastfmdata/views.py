@@ -133,10 +133,7 @@ def return_chart_data( request, api, user, weeks, ):
         for artist in artist_totals:
             artist_info = api.artist_getinfo( artist = artist['name'] )
             if hasattr( artist_info.tags, 'tag' ):
-                if isinstance( artist_info.tags, list ):
-                    artist_genre = artist_info.tags.tag[0].name
-                else:
-                    artist_genre = 'unknown'
+                artist_genre = artist_info.tags.tag[0].name
             else:
                 artist_genre = 'unknown'
 
@@ -190,10 +187,7 @@ def top_artist_list( request ):
         artist_dict = {'name' : artist.name, 'user_playcount' : artist.playcount}
         artist_info = api.artist_getinfo( artist = artist.name )
         if hasattr( artist_info.tags, 'tag' ):
-            if isinstance( artist_info.tags, list ):
-                artist_genre = artist_info.tags.tag[0].name
-            else:
-                artist_genre = 'unknown'
+            artist_genre = artist_info.tags.tag[0].name
         else:
             artist_genre = 'unknown'
         artist_dict['genre'] = artist_genre
