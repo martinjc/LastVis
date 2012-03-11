@@ -40,7 +40,8 @@
         
        function render_bubble( processingsketch ) {
            processingsketch.fill(this.colour);
-           processingsketch.ellipse(this.x, this.y, this.width, this.width);
+           var width = this.width/document.zoom_level;
+           processingsketch.ellipse(this.x, this.y, width, width);
         }
         
         function draw_name( processingsketch ) {
