@@ -80,10 +80,10 @@
                var x = 25 + x_pixels_per_play * (artist_data.artists[i].total_playcount - min_total_playcounts);
                var y = (HEIGHT -  25) - (y_pixels_per_listener * (artist_data.artists[i].total_listeners - min_total_listeners));
                var width = pixels_per_user_play * (artist_data.artists[i].user_playcount - min_user_listens);
-               var bubble = new bubble(x, y, width);
+               var b = new bubble(x, y, width);
                console.log(x, + ', ' + y + ', ' + width)
                console.log(bubble);
-               this.bubbles.push(bubble);
+               this.bubbles.push(b);
            }
         }
         
