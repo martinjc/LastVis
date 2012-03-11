@@ -20,6 +20,8 @@
     }
     
     $(document).ready(function(){
+        var WIDTH = 800;
+        var HEIGHT = 600;
         var canvas = document.getElementById('viscanvas');
         var pjs = new Processing(canvas);
         
@@ -27,7 +29,7 @@
         
         pjs.artist_data = {};
         pjs.setup = function() {
-            pjs.size(800,800);
+            pjs.size(WIDTH, HEIGHT);
             pjs.noLoop();
             pjs.background(255);
             pjs.smooth();
@@ -61,14 +63,14 @@
            var max_user_listens = Math.max.apply(null, user_listens);
            var min_user_listens = Math.min.apply(null, user_listens);
            console.log( max_user_listens + ', ' + min_user_listens );
-           var x_pixels_per_play = 800/(max_total_playcounts-min_total_playcounts);
-           var y_pixels_per_listener = 800/(max_total_listeners-min_total_listeners);
+           var x_pixels_per_play = WIDTH / (max_total_playcounts-min_total_playcounts);
+           var y_pixels_per_listener = HEIGHT / (max_total_listeners-min_total_listeners);
            console.log(x_pixels_per_play);
            console.log(y_pixels_per_listener);
            for(var i in this.artist_data.artists) {
                console.log( (this.artist_data.artists[i].total_playcount - min_total_playcounts) + ', ' + (this.artist_data.artists[i].total_listeners - min_total_listeners) );
                var x = x_pixels_per_play * (this.artist_data.artists[i].total_playcount - min_total_playcounts);
-               var y = 800 - (y_pixels_per_listener * (this.artist_data.artists[i].total_listeners - min_total_listeners));
+               var y = HEIGHT - (y_pixels_per_listener * (this.artist_data.artists[i].total_listeners - min_total_listeners));
                console.log(x + ', ' + y);
                pjs.ellipse(x, y, 2, 2);
            }
