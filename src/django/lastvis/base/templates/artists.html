@@ -122,6 +122,7 @@
             var mouseX = pjs.mouseX;
             var mouseY = pjs.mouseY;
             for(var i in this.bubbles) {
+                this.bubbles[i].set_name_visible(false);
                 if(this.bubbles[i].contains(mouseX, mouseY)) {
                     this.bubbles[i].set_name_visible(true);
                 }
