@@ -34,8 +34,7 @@
             var chart_url = '{{root_url}}api/topartists/?callback=?';
             $.getJSON(chart_url, function(chart_data) {
                 pjs.set_artist_data(chart_data);
-                console.log(chart_data.artists);
-                console.log(pjs.artist_data.artists);
+                pjs.redraw();
             });            
         }
         
@@ -44,7 +43,9 @@
         }
         
         pjs.draw = function() {
-            console.log(this.artist_data);
+           for(var i in this.artist_data.artists) {
+               pjs.ellipse(i, i, 2, 2);
+           }
         }
         
         pjs.mouseClicked = function() {
