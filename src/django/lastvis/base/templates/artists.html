@@ -43,7 +43,25 @@
         }
         
         pjs.draw = function() {
+           var total_playcounts = [];
+           var total_listeners = [];
+           var user_listens = [];
            for(var i in this.artist_data.artists) {
+               total_playcounts.push(artist_data.artists[i].total_playcount);
+               total_listeners.push(artist_data.artists[i].total_listeners);
+               users_listens.push(artist_data.artists[i].user_playcount);
+               var max_total_playcounts = pjs.max(total_playcounts);
+               var min_total_playcounts = pjs.min(total_playcounts);
+               var max_total_listeners =  pjs.max(total_listeners);
+               var min_total_listeners = pjs.min(total_listeners);
+               var max_user_listens = pjs.max(user_listens);
+               var min_user_listens = pjs.min(user_listens);
+               console.log( max_total_playcounts );
+               console.log( min_total_playcounts );
+               console.log( max_total_listeners );
+               console.log( max_total_listeners );
+               console.log( max_user_listens );
+               console.log( min_user_listens );
                pjs.ellipse(i, i, 2, 2);
            }
         }
