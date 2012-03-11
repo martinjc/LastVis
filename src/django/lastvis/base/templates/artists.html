@@ -126,7 +126,7 @@
         
         pjs.draw = function() {
             pjs.background(255,255,255);
-            pushMatrix();
+            pjs.pushMatrix();
             pjs.scale(pjs.zoom_level);
             pjs.translate( (pjs.offset_x/pjs.zoom_level), (pjs.offset_y/pjs.zoom_level));
             
@@ -136,7 +136,7 @@
             for(var i in this.bubbles) {
                 this.bubbles[i].draw_name(pjs);
             }
-            popMatrix();
+            pjs.popMatrix();
             pjs.smooth();
         }
 
