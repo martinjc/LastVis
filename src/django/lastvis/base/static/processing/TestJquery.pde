@@ -2,22 +2,29 @@ private ArrayList<Slice> genres;
 private int fontSize;
 private double pi2 = 2.0*3.141592653;
 
-Slice addData(String xmlString){
-  printMessage(xmlString);
-  printMessage(xmlString.chart.genres[0].name);
-  XMLElement data = new XMLElement(xmlString);
+Slice addData(String jsonData){
+  //printMessage(xmlString);
+  //printMessage(xmlString.chart.genres[0].name);
+  
+  //String bob = jsonData.chart.genres[0].name;
+  //println(bob);
+    
+  //XMLElement data = new XMLElement(xmlString);
 
-  int totalplaycount = data.getAttribute("playcount");
+  int totalplaycount = jsonData.chart.playcount;
+  //println("jsonplaycount" + totalplaycount);
+  //int totalplaycount = .getAttribute("playcount");
 
-  XMLElement[] children = data.getChildren();
+  String[] children = jsonData.chart.genres;
+  //println("Jsontest " + children[0].playcount); 
 
   genres = new ArrayList<Slice>();
 
   //Construct genre slices
   double angleSum = 0;
-  for(XMLElement genre: children){ //Per slice
-    String name = genre.getAttribute("name");
-    int playcount = genre.getAttribute("playcount");
+  for(String genre: children){ //Per slice
+    String name = genre.name;
+    int playcount = genre.playcount;
     float sliceAngle = pi2*((double)playcount/(double)totalplaycount);
     genres.add(new Slice(genre, name, playcount, angleSum, sliceAngle, ((float)min(width, height) * (random(0.3)+0.7))));
     angleSum+=sliceAngle;
@@ -27,12 +34,12 @@ Slice addData(String xmlString){
     populateSliceList(genre);
   }
 
-  for(Slice genre: genres){
+  /*for(Slice genre: genres){
     print(genre.getName() + "," + "(" + genre.getPlaycount() + " plays)");
      for(Slice artist: genre.slices){
        println("\t"+artist.getName() + ", " + artist.getPlaycount() + " plays");
      }
-  }
+  }*/
 
   render();
 }
@@ -43,10 +50,10 @@ void populateSliceList(Slice slice){
     float maxAngle = slice.edges[1];
     float diffAngle = maxAngle-minAngle;
     int angleSum = minAngle;
-    XMLElement[] children = slice.getXML().getChildren();
-    for(XMLElement subSlice: children){
-      String name = subSlice.getAttribute("name");
-      int subSlicePlaycount = subSlice.getAttribute("playcount");
+    String[] children = slice.getJson().artists;
+    for(String subSlice: children){
+      String name = subSlice.name;
+      int subSlicePlaycount = subSlice.playcount;
       float subSliceAngle = diffAngle*((double)subSlicePlaycount/(double)slicePlaycount);
       slice.addSubSlice(new Slice(subSlice, name, subSlicePlaycount, angleSum, subSliceAngle, slice.getDiameter()));
       angleSum+=subSliceAngle;
