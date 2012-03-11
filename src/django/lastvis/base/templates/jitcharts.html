@@ -24,35 +24,7 @@
 <script src="{{STATIC_PATH}}js/jquery.json2xml.js"></script>
 <script src="{{STATIC_PATH}}js/jit-yc.js"></script>
 <script>
-    var printMessage = function(msg) {
-        console.log(msg);
-    }
-
-    $.getJSON('{{root_url}}api/weeklychartlist/', function(data) {
-        var max = 0;
-        var min = 9007199254740992;
-        for(var i in data.charts) {
-            if(data.charts[i].start < min) {
-                min = data.charts[i].start; 
-            }
-            if(data.charts[i].end > max) {
-                max = data.charts[i].end;
-            }
-        }
-        max = parseInt(max) * 1000;
-        min = parseInt(min) * 1000;
-        $('#date-select').datepicker({
-              dateFormat : "@",
-              maxDate : max.toString(),
-              minDate : min.toString(),
-              onSelect : function(dateText, inst) {
-                  var date = parseInt(dateText) / 1000;
-                  for(var i in data.charts) {
-                      if(date >= data.charts[i].start && date <= data.charts[i].end) {
-                          var chart_url = '{{root_url}}api/weeklychart/' + i + '/?callback=?';
-                          $.getJSON(chart_url, function(chart_data) {
-                              
-                                  var json = {
+var json = {
         'label': ['label A', 'label B', 'label C', 'label D'],
         'values': [
         {
@@ -81,6 +53,64 @@
         }]
         
     };
+    
+    var pieChart = new $jit.PieChart({
+      //id of the visualization container
+      injectInto: 'canvasvis',
+      //whether to add animations
+      animate: true,
+      //offsets
+      offset: 30,
+      sliceOffset: 0,
+      labelOffset: 20,
+      //slice style
+      //type: useGradients? 'stacked:gradient' : 'stacked',
+      //whether to show the labels for the slices
+      showLabels:true,
+      //resize labels according to
+      //pie slices values set 7px as
+      //min label size
+      resizeLabels: 7,
+      //label styling
+      Label: {
+        type: 'Native', //Native or HTML
+        size: 20,
+        family: 'Arial',
+        color: 'white'
+      },
+      //enable tips
+      Tips: {
+        enable: true,
+        onShow: function(tip, elem) {
+           tip.innerHTML = "<b>" + elem.name + "</b>: " + elem.value;
+        }
+      }
+    });
+    //load JSON data.
+    pieChart.loadJSON(json);
+    
+    $.getJSON('{{root_url}}api/weeklychartlist/', function(data) {
+        var max = 0;
+        var min = 9007199254740992;
+        for(var i in data.charts) {
+            if(data.charts[i].start < min) {
+                min = data.charts[i].start; 
+            }
+            if(data.charts[i].end > max) {
+                max = data.charts[i].end;
+            }
+        }
+        max = parseInt(max) * 1000;
+        min = parseInt(min) * 1000;
+        $('#date-select').datepicker({
+              dateFormat : "@",
+              maxDate : max.toString(),
+              minDate : min.toString(),
+              onSelect : function(dateText, inst) {
+                  var date = parseInt(dateText) / 1000;
+                  for(var i in data.charts) {
+                      if(date >= data.charts[i].start && date <= data.charts[i].end) {
+                          var chart_url = '{{root_url}}api/weeklychart/' + i + '/?callback=?';
                               var pieChart = new $jit.PieChart({
                                   //id of the visualization container  
                                   injectInto: 'viscanvas',  
