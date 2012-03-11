@@ -63,7 +63,7 @@
            console.log(x_pixels_per_play);
            console.log(y_pixels_per_listener);
            for(var i in this.artist_data.artists) {
-               console.log( this.artist_data.artists[i].total_playcount - min_total_playcounts + ', ' + this.artist_data.artists[i].total_listeners - min_total_listeners );
+               console.log( (this.artist_data.artists[i].total_playcount - min_total_playcounts) + ', ' + (this.artist_data.artists[i].total_listeners - min_total_listeners) );
                var x = x_pixels_per_play * (this.artist_data.artists[i].total_playcount - min_total_playcounts);
                var y = y_pixels_per_listener * (this.artist_data.artists[i].total_listeners - min_total_listeners);
                console.log(x + ', ' + y);
