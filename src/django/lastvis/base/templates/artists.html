@@ -5,15 +5,6 @@
         <div class="row">
             <div class="span4">
                 <h1>Welcome {{lastfmuser.user.username}}!</h1>
-                <div class="control-group">
-                    <label class="control-label" for="date-select">Select Chart Date</label>
-                    <div class="controls">
-                        <div id="date-select">
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="span8">
                 <canvas id="viscanvas"></canvas>
             </div>
@@ -45,7 +36,7 @@
         pjs.set_artist_data = function(data) {
             pjs.artist_data = data;
         }
-        var chart_url = '{{root_url}}api/topartists/' + i + '/?callback=?';
+        var chart_url = '{{root_url}}api/topartists/?callback=?';
         $.getJSON(chart_url, function(chart_data) {
             pjs.set_artist_data(chart_data);
             pjs.setup();

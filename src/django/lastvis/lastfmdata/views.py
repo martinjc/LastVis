@@ -32,7 +32,7 @@ def get_api_and_user( request ):
     if session_key is not None:
 
             auth = LastpyAuthHandler( request.session['session_key'], API_KEY, API_SECRET )
-            cache = DjangoDBCache( timeout = 60 * 60 * 24 )
+            cache = DjangoDBCache( timeout = 60 * 60 * 48 )
             api = API( auth, cache = cache )
 
     user = request.user
