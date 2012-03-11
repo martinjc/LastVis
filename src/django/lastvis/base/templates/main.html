@@ -15,6 +15,11 @@
                     <p> Click <a href="{{ root_url }}auth/">login with last.fm</a> to begin.</p>
                 {% endif %}
             </div>
+            {% if lastfmuser %}
+            <h1>Choose a visualisation below:</h1>
+            <p><a href="{{root_url}}weeklycharts/">View your weekly charts by the genre of artist for any week</a></p>
+            <p><a href="{{root_url}}artists/">View your top artist listening compared to others on Last.FM</a></p>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
