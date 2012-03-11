@@ -54,6 +54,8 @@
         pjs.artist_data = {};
         pjs.setup = function() {
             pjs.size(WIDTH, HEIGHT);
+            pjs.centreX = WIDTH/2;
+            pjs.centreY = HEIGHT/2;
             pjs.background(255);
             pjs.smooth();
             pjs.textFont(pjs.loadFont("Ziggurat-HTF-Black-32.vlw"), 8);
@@ -98,7 +100,9 @@
         }
         
         pjs.mouseClicked = function() {
-            //pjs.translate(pjs.mouseX, pjs.mouseY);
+            var x_translate = pjs.centreX - pjs.mouseX;
+            var y_translate = pjs.centreY - pjs.mouseY;
+            pjs.translate(x_translate, y_translate);
             if(pjs.mouseButton === pjs.LEFT) {
                 pjs.pushMatrix();
                 pjs.scale(2.0);    
