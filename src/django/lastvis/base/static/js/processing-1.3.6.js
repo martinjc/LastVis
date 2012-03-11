@@ -2445,8 +2445,8 @@
       parse: function(textstring) {
         var xmlDoc;
         try {
-          var extension = textstring.substring(textstring.length - 4);
-          if (extension === ".xml" || extension === ".svg") textstring = ajax(textstring);
+          //var extension = textstring.substring(textstring.length - 4);
+          //if (extension === ".xml" || extension === ".svg") textstring = ajax(textstring);
           xmlDoc = (new DOMParser).parseFromString(textstring, "text/xml");
           var elements = xmlDoc.documentElement;
           if (elements) this.parseChildrenRecursive(null, elements);
