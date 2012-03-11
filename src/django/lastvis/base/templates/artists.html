@@ -36,7 +36,7 @@
         
         function draw_name( processingsketch ) {
             processingsketch.fill( 0,0,0 );
-            processingsketch.text( this.name, this.x, this.y + this.width );
+            processingsketch.text( this.name, this.x, this.y + this.width/2 );
         }
         
         function bubble(x, y, width, name, ps) {
@@ -108,6 +108,7 @@
         }
         
         pjs.draw = function() {
+            pjs.camera();
             pjs.background(255,255,255);
             for(var i in this.bubbles) {
                 this.bubbles[i].render(pjs);
