@@ -19,19 +19,6 @@
         console.log(msg);
     }
     
-    function render_bubble( pjs ) {
-       pjs.fill(pjs.random(255), pjs.random(255),pjs.random(255));
-       pjs.ellipse(x, y, width, width);        
-    }
-    
-    function bubble(x, y, width) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        
-        this.render = render_bubble;
-    }
-    
     $(document).ready(function(){
         var WIDTH = 800;
         var HEIGHT = 600;
@@ -40,6 +27,19 @@
         var pjs = new Processing(canvas);
         
         var value = 0;
+        
+       function render_bubble( processingsketch ) {
+           processingsketch.fill(pjs.random(255), pjs.random(255),pjs.random(255));
+           processingsketch.ellipse(x, y, width, width);        
+        }
+        
+        function bubble(x, y, width) {
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            
+            this.render = render_bubble;
+        }
         
         pjs.artist_data = {};
         pjs.setup = function() {
@@ -88,7 +88,7 @@
         
         pjs.draw = function() {
             for(var i in this.bubbles) {
-                bubbles[i].render(pjs);
+                this.bubbles[i].render(pjs);
             }
             pjs.smooth();
         }
