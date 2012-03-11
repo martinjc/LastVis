@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container">
         <h1>{{lastfmuser.user.username}}'s Top Artists</h1>
-        <p> Top artists for {{lastfmuser.user.username}}. Size represents number of listens by the user, x-axis is the total playcount on last.fm and y-axis is the total number of listeners on last.fm</p>
+        <p> Top artists for {{lastfmuser.user.username}}. The x-axis position represents the total playcount on last.fm while the y-axis is the total number of listeners on last.fm. An artist with a bubble in the top right has many listeners with a high playcount, while one in the bottom left has fewer listeners with a lower total playcount. The size of the bubble represents the number of plays of the artist by this user, a larger bubble means the user has listened to them more</p>
     </div>
     <div class="container">
         <canvas id="viscanvas"></canvas>    
