@@ -56,7 +56,6 @@
                           $.getJSON(chart_url, function(chart_data) {
                               var options = {
                                   formatOutput : true,
-                                  nodes: ['genres.name', 'root.playcount', 'genres.playcount', 'genres.artists.playcount', 'genres.artists.name', 'genres.artists.tracks.name', 'genres.artists.tracks.playcount'],
                               };
                               var xmlData = $.json2xml(chart_data.chart, options);
                               //console.log(xmlData);
