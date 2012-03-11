@@ -208,7 +208,7 @@ def top_artist_list_for_user( request, user_name ):
 
     for artist in artist_list.artists:
         artist_dict = {'name' : artist.name, 'user_playcount' : artist.playcount}
-        artist_info = api.artist_getinfo( artist = artist.name )
+        artist_info = api.artist_getinfo( artist = artist.name, user = user_name )
         if hasattr( artist_info.tags, 'tag' ):
             artist_genre = artist_info.tags.tag[0].name
         else:
