@@ -186,7 +186,7 @@ def top_artist_list( request ):
     for artist in artist_list.artists:
         artist_dict = {'name' : artist.name, 'user_playcount' : artist.playcount}
         artist_info = api.artist_getinfo( artist = artist.name )
-        artist_dict['total_playcount'] = artist_info.artist.stats.playcount
+        artist_dict['total_playcount'] = artist_info.stats.playcount
         top_artists.append( artist_dict )
 
     return return_data( request, { 'artists' : top_artists } )
