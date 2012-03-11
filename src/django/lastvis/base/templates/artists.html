@@ -117,9 +117,9 @@
         
         pjs.keyPressed = function() {
             console.log(pjs.key);
-            if(pjs.key === 'a') {
+            if(pjs.key == 'a') {
                 pjs.zoom_level += 0.5;    
-            } else if(pjs.key === 'z' ) {
+            } else if(pjs.key == 'z' ) {
                 pjs.zoom_level -= 0.5;
             }
             pjs.zoom_level = pjs.constrain(pjs.zoom_level, 0, 100);
