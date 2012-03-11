@@ -21,8 +21,14 @@
     }
     
     $(document).ready(function(){
+        document.zoom_level = 1.0;
         $('#viscanvas').bind('mousewheel', function(event, delta) {
-            console.log(delta);
+            if(delta < 0) {
+                document.zoom_level -= 0.5;
+            }
+            else {
+                document.zoom_level += 0.5
+            }
         })
         var WIDTH = 1000;
         var HEIGHT = 800;
@@ -59,7 +65,7 @@
         pjs.artist_data = {};
         pjs.setup = function() {
             pjs.size(WIDTH, HEIGHT);
-            pjs.zoom_level = 1.0;
+            pjs.zoom_level = document.zoom_level;
             pjs.poffset_x = 0;
             pjs.poffset_y = 0;
             pjs.offset_x = 0;
@@ -133,7 +139,7 @@
         pjs.draw = function() {
             pjs.background(255,255,255);
             pjs.pushMatrix();
-            pjs.scale(pjs.zoom_level);
+            pjs.scale(document.zoom_level);
             pjs.translate( (pjs.offset_x/pjs.zoom_level), (pjs.offset_y/pjs.zoom_level));
             
             for(var i in this.bubbles) {
