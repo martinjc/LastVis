@@ -25,7 +25,6 @@ urlpatterns = patterns( 'lastvis.lastfmdata.views',
     url( r'weeklychart/(?P<week>\w+)/$', view = weekly_chart, name = 'weekly_chart' ),
 
     url( r'topartists/$', view = top_artist_list, name = 'top_artists' ),
-    url( r'topartistsuser/(?P<other_user_name>\w+)/$', view = top_artist_list_for_user, name = 'top_artists_for_user' ),
 
     url( r'test/$', view = test, name = 'api_test' ),
     url( r'test2/$', view = test2, name = 'api_test' ),
