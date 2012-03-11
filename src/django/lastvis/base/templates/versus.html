@@ -8,10 +8,10 @@
                 <p> This allows you to compare your top artists to another Last.FM User</p>      
             </div>
             <div class="span6">
-                    <form name="other_user" class="well">
+                    <form id="other_user" class="well">
                     <label>Last.FM Username</label>
                     <input name="lfm_username" type="text" class="span3" placeholder="Last.fm User..."> <span class="help-inline">Enter the Last.FM username of the person to compare against here! </span>
-                    <button onclick="validate()" class="btn">Ok, Compare!</button>
+                    <button type="submit" class="btn">Ok, Compare!</button>
                 </form>
             </div>
         </div>
@@ -30,6 +30,13 @@
     var printMessage = function(msg) {
         console.log(msg);
     }
+    
+    $(document).ready(function(){
+        $('#contactForm').submit(function () {
+            validate();
+            return false;
+        }); 
+    });
     function validate() {
         var x=document.forms["other_user"]["lfm_username"].value;
         console.log(x);
