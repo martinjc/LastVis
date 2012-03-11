@@ -115,14 +115,14 @@
             pjs.offset_y = pjs.mouseY - pjs.mouse_pressed_y + pjs.poffset_y;
         }
         
-        pjs.mouseClicked = function() {
-            if(pjs.mouseButton === pjs.LEFT) {
-                pjs.zoom_level += 0.1;    
-            } else {
-                pjs.zoom_level -= 0.1;
+        pjs.keyPressed = function() {
+            console.log(pjs.key);
+            if(pjs.key === 'a') {
+                pjs.zoom_level += 0.5;    
+            } else if(pjs.key === 'z' ) {
+                pjs.zoom_level -= 0.5;
             }
             pjs.zoom_level = pjs.constrain(pjs.zoom_level, 0, 100);
-            pjs.redraw();
         }
         
         pjs.draw = function() {
