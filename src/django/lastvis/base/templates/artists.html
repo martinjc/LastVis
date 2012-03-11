@@ -52,14 +52,14 @@
                total_listeners.push(this.artist_data.artists[i].total_listeners);
                user_listens.push(this.artist_data.artists[i].user_playcount);  
            }
-           var max_total_playcounts = pjs.max(total_playcounts);
-           var min_total_playcounts = pjs.min(total_playcounts);
+           var max_total_playcounts = Math.max.apply(null, total_playcounts);
+           var min_total_playcounts = Math.min.apply(null, total_playcounts);
            console.log( max_total_playcounts + ', ' + min_total_playcounts );
-           var max_total_listeners =  pjs.max(total_listeners);
-           var min_total_listeners = pjs.min(total_listeners);
+           var max_total_listeners =  Math.max.apply(null, total_listeners);
+           var min_total_listeners = Math.min.apply(null, total_listeners);
            console.log( max_total_listeners + ', ' + min_total_listeners );
-           var max_user_listens = pjs.max(user_listens);
-           var min_user_listens = pjs.min(user_listens);
+           var max_user_listens = Math.max.apply(null, user_listens);
+           var min_user_listens = Math.min.apply(null, user_listens);
            console.log( max_user_listens + ', ' + min_user_listens );
            var x_pixels_per_play = 800/(max_total_playcounts-min_total_playcounts);
            var y_pixels_per_listener = 800/(max_total_listeners-min_total_listeners);
