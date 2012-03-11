@@ -8,10 +8,10 @@
                 <p> This allows you to compare your top artists to another Last.FM User</p>      
             </div>
             <div class="span6">
-                    <form class="well">
+                    <form name="other_user" class="well" onsubmit="validate()">
                     <label>Last.FM Username</label>
-                    <input type="text" class="span3" placeholder="Last.fm User..."> <span class="help-inline">Enter the Last.FM username of the person to compare against here! </span>
-                    <button type="submit" class="btn">Ok, Compare!</button>
+                    <input name="lfm_username" type="text" class="span3" placeholder="Last.fm User..."> <span class="help-inline">Enter the Last.FM username of the person to compare against here! </span>
+                    <button type="submit" onsubmit="validate()" class="btn">Ok, Compare!</button>
                 </form>
             </div>
         </div>
@@ -30,9 +30,19 @@
     var printMessage = function(msg) {
         console.log(msg);
     }
-    
-    $(document).ready(function(){
-        document.zoom_level = 1.0;
+    function validate() {
+        var x=document.forms["other_user"]["lfmusername"].value;
+        console.log(x);
+        if (x==null || x=="") {
+            alert("First name must be filled out");  
+        } else {
+            do_comparison(x);
+        }
+    }
+    function do_comparison(other_user) {
+       
+
+        /*document.zoom_level = 1.0;
         $('#viscanvas').bind('mousewheel', function(event, delta) {
             if(delta < 0) {
                 document.zoom_level -= 0.5;
@@ -40,7 +50,7 @@
             else {
                 document.zoom_level += 0.5
             }
-        });
+        });*/
         var WIDTH = 1000;
         var HEIGHT = 650;
         var MAX_CIRCLE_WIDTH = 100;
