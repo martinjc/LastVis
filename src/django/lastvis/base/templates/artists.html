@@ -3,6 +3,7 @@
 {% block content %}
     <div class="container hero-unit">
         <h1>{{lastfmuser.user.username}}'s Top Artists</h1>
+        <p> Top artists for {{lastfmuser.user.username}}. Size represents number of listens by the user, x-axis is the total playcount on last.fm and y-axis is the total number of listeners on last.fm</p>
     </div>
     <div class="container">
         <canvas id="viscanvas"></canvas>    
