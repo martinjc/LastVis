@@ -53,7 +53,6 @@
                   var date = parseInt(dateText) / 1000;
                   for(var i in data.charts) {
                       if(date >= data.charts[i].start && date <= data.charts[i].end) {
-                          alert([i]);
                           var pjs = Processing.getInstanceById('viscanvas');
                           var chart_url = '{{root_url}}api/weeklychart/' + i + '/?callback=?';
                           $.getJSON(chart_url, function(chart_data) {
