@@ -5,8 +5,8 @@ private double pi2 = 2.0*3.141592653;
 Slice addData(String xmlString){
   print("test");
   print(xmlString);
-  XMLElement data = new XMLElement(xmlString);
-/*
+  XMLElement data = XMLElement.parse(xmlString);
+
   int totalplaycount = data.getAttribute("playcount");
 
   XMLElement[] children = data.getChildren();
@@ -22,8 +22,8 @@ Slice addData(String xmlString){
     genres.add(new Slice(genre, name, playcount, angleSum, sliceAngle, ((float)min(width, height) * (random(0.3)+0.7))));
     angleSum+=sliceAngle;
   }
-  */
-  /*
+
+
   for(Slice genre: genres){
     populateSliceList(genre);
   }
@@ -34,8 +34,8 @@ Slice addData(String xmlString){
        println("\t"+artist.getName() + ", " + artist.getPlaycount() + " plays");
      }
   }
-  */
-  //render();
+
+  render();
 }
 
 void populateSliceList(Slice slice){
@@ -65,11 +65,11 @@ void setup(){
 
 void render(){
   for (Slice slice: genres){
-    //Slice slice = genres.get(4);
+    Slice slice = genres.get(4);
     slice.render();
-    //for(Slice sub: slice.slices){
-    //  sub.render();
-    //}
+    for(Slice sub: slice.slices){
+      sub.render();
+    }
   }
   for(Slice s: genres){
     renderSliceText(s);
