@@ -215,8 +215,8 @@ def top_track_list( request ):
         else:
             track_genre = 'unknown'
         track_dict['genre'] = track_genre
-        track_dict['total_playcount'] = track_info.stats.playcount
-        track_dict['total_listeners'] = track_info.stats.listeners
+        track_dict['total_playcount'] = track_info.playcount
+        track_dict['total_listeners'] = track_info.listeners
         top_tracks.append( track_dict )
 
     return return_data( request, { 'tracks' : top_tracks } )
