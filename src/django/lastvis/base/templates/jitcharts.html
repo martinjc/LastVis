@@ -49,17 +49,41 @@
                   var date = parseInt(dateText) / 1000;
                   for(var i in data.charts) {
                       if(date >= data.charts[i].start && date <= data.charts[i].end) {
-                          alert([i]);
-                          var pjs = Processing.getInstanceById('viscanvas');
                           var chart_url = '{{root_url}}api/weeklychart/' + i + '/?callback=?';
                           $.getJSON(chart_url, function(chart_data) {
-                              var options = {
-                                  formatOutput : true,
-                                  nodes: ['genres.name', 'root.playcount', 'genres.playcount', 'genres.artists.playcount', 'genres.artists.name', 'genres.artists.tracks.name', 'genres.artists.tracks.playcount'],
-                              };
-                              var xmlData = $.json2xml(chart_data.chart, options);
-                              //console.log(xmlData);
-                              pjs.addData(xmlData);
+                              var pieChart = new $jit.PieChart({
+                                  //id of the visualization container  
+                                  injectInto: 'infovis',  
+                                  //whether to add animations  
+                                  animate: true,  
+                                  //offsets  
+                                  offset: 30,  
+                                  sliceOffset: 0,  
+                                  labelOffset: 20,  
+                                  //slice style  
+                                  type: useGradients? 'stacked:gradient' : 'stacked',  
+                                  //whether to show the labels for the slices  
+                                  showLabels:true,  
+                                  //resize labels according to  
+                                  //pie slices values set 7px as  
+                                  //min label size  
+                                  resizeLabels: 7,  
+                                  //label styling  
+                                  Label: {  
+                                    type: labelType, //Native or HTML  
+                                    size: 20,  
+                                    family: 'Arial',  
+                                    color: 'white'  
+                                  },  
+                                  //enable tips  
+                                  Tips: {  
+                                    enable: true,  
+                                    onShow: function(tip, elem) {  
+                                       tip.innerHTML = "<b>" + elem.name + "</b>: " + elem.value;  
+                                    }  
+                                  }                                   
+                              });
+                              pieChart.loadJSON(chart_data);
                           });
                       }
                   } 
