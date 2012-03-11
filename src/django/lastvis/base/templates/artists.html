@@ -30,7 +30,7 @@
         var value = 0;
         
        function render_bubble( processingsketch ) {
-           processingsketch.fill(pjs.random(255), pjs.random(255),pjs.random(255));
+           processingsketch.fill(this.colour);
            processingsketch.ellipse(this.x, this.y, this.width, this.width);
         }
         
@@ -44,6 +44,7 @@
             this.y = y;
             this.width = width;
             this.name = name;
+            this.colour = (255,255,255);
             
             this.name_visible = false;
             
@@ -117,9 +118,9 @@
         
         pjs.keyPressed = function() {
             console.log(pjs.key);
-            if(pjs.key == 'a') {
+            if(pjs.key.code == 97) {
                 pjs.zoom_level += 0.5;    
-            } else if(pjs.key == 'z' ) {
+            } else if(pjs.key.code == 115 ) {
                 pjs.zoom_level -= 0.5;
             }
             pjs.zoom_level = pjs.constrain(pjs.zoom_level, 0, 100);
