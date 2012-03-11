@@ -153,6 +153,13 @@
                 this.bubbles[i].draw_name(pjs);
             }
             pjs.popMatrix();
+            
+            pjs.textFont(pjs.loadFont("Ziggurat-HTF-Black-32.vlw"), 12);
+            pjs.text('Last.FM Total Playcount ->', BORDER, HEIGHT-BORDER);
+            pjs.pushMatrix();
+            pjs.rotate(Math.PI/2.0);
+            pjs.text('Last.FM Total Listeners ->', 0, HEIGHT-BORDER);
+            pjs.popMatrix();
             pjs.smooth();
         }
         
