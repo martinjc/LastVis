@@ -156,9 +156,11 @@
             pjs.textFont(pjs.loadFont("Ziggurat-HTF-Black-32.vlw"), 16);
             for(var i in this.genres) {
                 pjs.fill(this.genre_colours[i]);
-                pjs.text(this.genres[i], WIDTH-150, HEIGHT - (20 * i));
+                pjs.text(this.genres[i], WIDTH-150, HEIGHT - (20 * (i+2)));
             }
             pjs.fill(0);
+            pjs.line(20, 0, 20, HEIGHT-20);
+            pjs.line(20, HEIGHT-20, WIDTH-20, HEIGHT-20);
             pjs.text('Unique Last.FM Listeners ->', 0, HEIGHT-20 );
             //pjs.pushMatrix();
             pjs.text('Number of plays on Last.FM ->', 20, HEIGHT-20);
