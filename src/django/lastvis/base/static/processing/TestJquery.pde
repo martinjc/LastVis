@@ -2,20 +2,15 @@ private ArrayList<Slice> genres;
 private int fontSize;
 private double pi2 = 2.0*3.141592653;
 
-
 Slice addData(String xmlString){
-  printMessage(xmlString);
-
-  String someString = new String(xmlString);
-
-  XMLElement xmlElem = XMLElement.parse(someString);
-
-  int totalplaycount = xmlElem.getAttribute("playcount");
-
-  XMLElement[] children = xmlElem.getChildren();
-
+  XMLElement data = new XMLElement(xmlString);
+  
+  int totalplaycount = data.getAttribute("playcount");
+  
+  XMLElement[] children = data.getChildren();
+  
   genres = new ArrayList<Slice>();
-
+  
   //Construct genre slices
   double angleSum = 0;
   for(XMLElement genre: children){ //Per slice
@@ -25,19 +20,18 @@ Slice addData(String xmlString){
     genres.add(new Slice(genre, name, playcount, angleSum, sliceAngle, ((float)min(width, height) * (random(0.3)+0.7))));
     angleSum+=sliceAngle;
   }
-
-
+  
   for(Slice genre: genres){
     populateSliceList(genre);
   }
-
+  
   for(Slice genre: genres){
     print(genre.getName() + "," + "(" + genre.getPlaycount() + " plays)");
      for(Slice artist: genre.slices){
        println("\t"+artist.getName() + ", " + artist.getPlaycount() + " plays");
      }
   }
-
+  
   render();
 }
 
@@ -68,8 +62,8 @@ void setup(){
 
 void render(){
   for (Slice slice: genres){
-    Slice slice = genres.get(4);
-    slice.render();
+    //Slice slice = genres.get(4);
+    //slice.render();
     for(Slice sub: slice.slices){
       sub.render();
     }
@@ -80,15 +74,15 @@ void render(){
 }
 
 void renderSliceText(Slice slice){
-
+  
   float[] centre = {width/2.0, height/2.0};
   float midAngle = slice.getMidAngle();
   float[] midSlice = LinearAlg.polarToCart(slice.diameter*0.3,midAngle);
-
+  
   midSlice[0] += slice.midPoint[0];
   midSlice[1] += slice.midPoint[1];
   midSlice[0] -= textWidth(slice.getName())*0.5;
-
+  
   fill(0);
   text(slice.getName(), midSlice[0], midSlice[1]);
 }
