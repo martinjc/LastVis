@@ -19,9 +19,23 @@
         console.log(msg);
     }
     
+    function render_bubble( pjs ) {
+       pjs.fill(pjs.random(255), pjs.random(255),pjs.random(255));
+       pjs.ellipse(x, y, width, width);        
+    }
+    
+    function bubble(x, y, width) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        
+        this.render = render_bubble;
+    }
+    
     $(document).ready(function(){
         var WIDTH = 800;
         var HEIGHT = 600;
+        var MAX_CIRCLE_WIDTH = 50;
         var canvas = document.getElementById('viscanvas');
         var pjs = new Processing(canvas);
         
@@ -41,15 +55,11 @@
         }
         
         pjs.set_artist_data = function(data) {
-           this.artist_data = data;
-        }
-        
-        pjs.draw = function() {
+           this.bubbles = [];
+           var artist_data = data;
            var total_playcounts = [];
            var total_listeners = [];
            var user_listens = [];
-           var MAX_CIRCLE_WIDTH = 50;
-           console.log(this.artist_data.artists);
            for(var i in this.artist_data.artists) {
                total_playcounts.push(this.artist_data.artists[i].total_playcount);
                total_listeners.push(this.artist_data.artists[i].total_listeners);
@@ -57,28 +67,28 @@
            }
            var max_total_playcounts = Math.max.apply(null, total_playcounts);
            var min_total_playcounts = Math.min.apply(null, total_playcounts);
-           console.log( max_total_playcounts + ', ' + min_total_playcounts );
            var max_total_listeners =  Math.max.apply(null, total_listeners);
            var min_total_listeners = Math.min.apply(null, total_listeners);
-           console.log( max_total_listeners + ', ' + min_total_listeners );
            var max_user_listens = Math.max.apply(null, user_listens);
            var min_user_listens = Math.min.apply(null, user_listens);
-           console.log( max_user_listens + ', ' + min_user_listens );
            var x_pixels_per_play = (WIDTH - 50) / (max_total_playcounts-min_total_playcounts);
            var y_pixels_per_listener = (HEIGHT - 50) / (max_total_listeners-min_total_listeners);
            var pixels_per_user_play = MAX_CIRCLE_WIDTH / (max_user_listens - min_user_listens);
-           console.log(x_pixels_per_play);
-           console.log(y_pixels_per_listener);
-           for(var i in this.artist_data.artists) {
-               console.log( (this.artist_data.artists[i].total_playcount - min_total_playcounts) + ', ' + (this.artist_data.artists[i].total_listeners - min_total_listeners) );
+           
+           for(var i  in this.artist_data.artists) {
                var x = 25 + x_pixels_per_play * (this.artist_data.artists[i].total_playcount - min_total_playcounts);
                var y = (HEIGHT -  25) - (y_pixels_per_listener * (this.artist_data.artists[i].total_listeners - min_total_listeners));
                var width = pixels_per_user_play * (this.artist_data.artists[i].user_playcount - min_user_listens);
-               console.log(x + ', ' + 'y ' + ', ' + width);
-               pjs.fill(pjs.random(255), pjs.random(255),pjs.random(255));
-               pjs.ellipse(x, y, width, width);
+               var bubble = new bubble(x, y, width);
+               this.bubbles.push(bubble);
            }
-           pjs.smooth();
+        }
+        
+        pjs.draw = function() {
+            for(var i in this.bubbles) {
+                bubbles[i].render(pjs);
+            }
+            pjs.smooth();
         }
         
         pjs.mouseClicked = function() {
