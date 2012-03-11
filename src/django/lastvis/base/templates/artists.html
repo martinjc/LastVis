@@ -32,6 +32,7 @@
            processingsketch.fill(pjs.random(255), pjs.random(255),pjs.random(255));
            processingsketch.ellipse(this.x, this.y, this.width, this.width);
            if(this.name_visible) {
+                processingsketch.fill( 0,0,0 );
                 processingsketch.text( this.name, this.x, this.y );
            }        
         }
@@ -41,7 +42,7 @@
         }
         
         function contains( x, y ) {
-            if(Math.sqrt((this.x-x)^2+(this.y-y)^2) <= this.width) {
+            if(Math.sqrt((this.x-x)^2+(this.y-y)^2) <= this.width/2) {
                 console.log('point is in there');
                 return true;
             }
