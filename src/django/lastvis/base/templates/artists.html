@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="span4">
+                <h1>Welcome {{lastfmuser.user.username}}!</h1>
+                <div class="control-group">
+                    <label class="control-label" for="date-select">Select Chart Date</label>
+                    <div class="controls">
+                        <div id="date-select">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span8">
+                <canvas id="viscanvas" data-processing-sources=""></canvas>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{STATIC_PATH}}js/processing-1.3.6.js"></script>
+<script>
+    var printMessage = function(msg) {
+        console.log(msg);
+    }
+    
+
+      var pjs = Processing.getInstanceById('viscanvas');
+      var chart_url = '{{root_url}}api/topartists/' + i + '/?callback=?';
+      $.getJSON(chart_url, function(chart_data) {
+          pjs.addData(chart_data);
+      });
+
+</script>
+
+
+{% endblock %}

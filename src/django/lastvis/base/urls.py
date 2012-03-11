@@ -12,4 +12,6 @@ urlpatterns = patterns( 'base.views',
     url( r'^processing/$', view = processing_test, name = 'base_processing' ),
 
     url( r'^weeklycharts/$', view = weekly_charts, name = 'weekly_charts' ),
+
+    url( r'^artists/$', view = artists, name = 'artists' ),
  )
