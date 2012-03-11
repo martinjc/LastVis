@@ -212,7 +212,10 @@ def top_track_list( request ):
         track_info = api.track_getinfo( artist = track.artist.name, track = track.name )
         logger.info( dir( track_info.toptags.tag ) )
         if hasattr( track_info.toptags, 'tag' ):
-            track_genre = track_info.toptags.tag[0].name
+            if isinstance( track_info.toptags.tag, list ):
+                track_genre = track_info.toptags.tag[0].name
+            else:
+                track_genre = track_info.toptags.tag.name
         else:
             track_genre = 'unknown'
         track_dict['genre'] = track_genre
