@@ -5,13 +5,13 @@ class Slice {
   private Slice left;
   private Slice right;
   private String name;
-  private XMLElement xml;
+  private String json;
   private int playcount;
   
   private ArrayList<Slice> slices;
   
-  Slice(XMLElement xml, String name, int playcount, float angleSum, float sliceAngle, float diameter){
-    this.xml = xml;
+  Slice(String json, String name, int playcount, float angleSum, float sliceAngle, float diameter){
+    this.json = json;
     this.name = name;
     this.playcount = playcount;
     
@@ -34,8 +34,8 @@ class Slice {
    return (edges[0]+edges[1])*0.5; 
   }
   
-  public XMLElement getXML(){
-    return xml;
+  public XMLElement getJson(){
+    return json;
   }
   
   public int getPlaycount(){
