@@ -23,6 +23,7 @@
         var WIDTH = 800;
         var HEIGHT = 600;
         var MAX_CIRCLE_WIDTH = 50;
+        var BORDER = 25;
         var canvas = document.getElementById('viscanvas');
         var pjs = new Processing(canvas);
         
@@ -45,7 +46,7 @@
         }
         
         function contains( x, y ) {
-            if(Math.sqrt((this.x-x)^2+(this.y-y)^2) <= this.width/2) {
+            if(Math.sqrt((this.x-(x+BORDER))^2+(this.y-(y+BORDER))^2) <= this.width/2) {
                 console.log('point is in there');
                 return true;
             }
@@ -106,8 +107,8 @@
            var pixels_per_user_play = MAX_CIRCLE_WIDTH / (max_user_listens - min_user_listens);
            
            for(var i  in artist_data.artists) {
-               var x = 25 + x_pixels_per_play * (artist_data.artists[i].total_playcount - min_total_playcounts);
-               var y = (HEIGHT -  25) - (y_pixels_per_listener * (artist_data.artists[i].total_listeners - min_total_listeners));
+               var x = BORDER + x_pixels_per_play * (artist_data.artists[i].total_playcount - min_total_playcounts);
+               var y = (HEIGHT -  BORDER) - (y_pixels_per_listener * (artist_data.artists[i].total_listeners - min_total_listeners));
                var width = pixels_per_user_play * (artist_data.artists[i].user_playcount - min_user_listens);
                var name = artist_data.artists[i].name;
                var b = new bubble(x, y, width, name);
