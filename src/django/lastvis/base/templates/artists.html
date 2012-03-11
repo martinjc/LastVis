@@ -46,10 +46,11 @@
            var total_playcounts = [];
            var total_listeners = [];
            var user_listens = [];
+           console.log(this.artist_data.artists);
            for(var i in this.artist_data.artists) {
-               total_playcounts.push(artist_data.artists[i].total_playcount);
-               total_listeners.push(artist_data.artists[i].total_listeners);
-               users_listens.push(artist_data.artists[i].user_playcount);
+               total_playcounts.push(this.artist_data.artists[i].total_playcount);
+               total_listeners.push(this.artist_data.artists[i].total_listeners);
+               users_listens.push(this.artist_data.artists[i].user_playcount);
                var max_total_playcounts = pjs.max(total_playcounts);
                var min_total_playcounts = pjs.min(total_playcounts);
                var max_total_listeners =  pjs.max(total_listeners);
