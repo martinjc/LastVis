@@ -1,22 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container">
+    <div class="container hero-unit">
         <div class="row">
             <div class="span4">
-                <h1>Welcome {{lastfmuser.user.username}}!</h1>
+                <h3>Weekly Charts for {{user.username}}</h3>
                 <div class="control-group">
                     <label class="control-label" for="date-select">Select Chart Date</label>
                     <div class="controls">
                         <div id="date-select">
-                            
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="span8">
-                <canvas id="viscanvas" data-processing-sources="{{STATIC_PATH}}processing/TestJquery.pde {{STATIC_PATH}}processing/Slice.pde {{STATIC_PATH}}processing/LinearAlg.pde"></canvas>
-            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="span8">
+            <canvas id="viscanvas" data-processing-sources="{{STATIC_PATH}}processing/TestJquery.pde {{STATIC_PATH}}processing/Slice.pde {{STATIC_PATH}}processing/LinearAlg.pde"></canvas>
         </div>
     </div>
 {% endblock %}
