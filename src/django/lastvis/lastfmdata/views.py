@@ -22,7 +22,7 @@ ROOT_URL = getattr( settings, 'ROOT_URL', 'http://127.0.0.1:8000/' )
 API_KEY = getattr( settings, 'API_KEY', '' )
 API_SECRET = getattr( settings, 'API_SECRET', '' )
 
-from test_json import chart
+from test_json import chart, chart2
 
 logger = logging.getLogger( 'lastvis.custom' )
 
@@ -178,6 +178,10 @@ def weekly_chart_list( request ):
 def test( request ):
 
     return return_data( request, { "chart" : chart } )
+
+def test2( request ):
+
+    return return_data( request, { "chart" : chart2 } )
 
 
 def return_data( request, data_dict ):
