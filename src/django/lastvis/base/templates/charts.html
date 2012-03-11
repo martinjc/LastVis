@@ -24,6 +24,9 @@
 {% block scripts %}
 <script src="{{STATIC_PATH}}js/jquery.json2xml.js"></script>
 <script>
+    var printMessage = function(msg) {
+        console.log(msg);
+    }
 
     $.getJSON('{{root_url}}api/weeklychartlist/', function(data) {
         var max = 0;

@@ -4,6 +4,8 @@ private double pi2 = 2.0*3.141592653;
 
 
 Slice addData(String xmlString){
+  printMessage(xmlString);
+
   XMLElement xmlElem = XMLElement.parse(xmlString);
 
   int totalplaycount = xmlElem.getAttribute("playcount");
