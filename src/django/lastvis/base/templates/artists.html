@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="span8">
-                <canvas id="viscanvas" data-processing-sources=""></canvas>
+                <canvas id="viscanvas"></canvas>
             </div>
         </div>
     </div>
@@ -28,13 +28,37 @@
         console.log(msg);
     }
     
-
-      var pjs = Processing.getInstanceById('viscanvas');
-      var chart_url = '{{root_url}}api/topartists/' + i + '/?callback=?';
-      $.getJSON(chart_url, function(chart_data) {
-          pjs.addData(chart_data);
-      });
-
+    $(document).ready(function(){
+        var canvas = document.getElementById('viscanvas');
+        var pjs = new Processing(canvas);
+        
+        var value = 0;
+        
+        pjs.artist_data = {};
+        pjs.setup = function() {
+            pjs.size(800,800);
+            pjs.noLoop();
+            pjs.background(255);
+            pjs.smooth();
+        }
+        
+        pjs.set_artist_data = function(data) {
+            pjs.artist_data = data;
+        }
+        var chart_url = '{{root_url}}api/topartists/' + i + '/?callback=?';
+        $.getJSON(chart_url, function(chart_data) {
+            pjs.set_artist_data(chart_data);
+            pjs.setup();
+        });
+        
+        pjs.draw = function() {
+            console.log(pjs.artist_data);
+        }
+        
+        pjs.mouseClicked = function() {
+            pjs.redraw();
+        }
+    });
 </script>
 
 
