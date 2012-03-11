@@ -118,7 +118,7 @@
                var width = pixels_per_user_play * (artist_data.artists[i].user_playcount - min_user_listens);
                var name = artist_data.artists[i].name;
                var colour = null;
-               for(var j in genres) {
+               for(var j in this.genres) {
                    if(this.genres[j] === artist_data.artists[i].genre) {
                        colour = this.genre_colours[j];
                    }
