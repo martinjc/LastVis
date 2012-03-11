@@ -3,6 +3,7 @@ private int fontSize;
 private double pi2 = 2.0*3.141592653;
 
 Slice addData(String xmlString){
+  Processing.logger = console;
   print("test");
   print(xmlString);
   XMLElement data = XMLElement.parse(xmlString);
@@ -61,7 +62,6 @@ void setup(){
   noStroke();
   fontSize = 16;
   textFont(loadFont("Ziggurat-HTF-Black-32.vlw"), fontSize);
-  Processing.logger = console;
 }
 
 void render(){
