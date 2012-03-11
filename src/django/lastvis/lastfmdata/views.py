@@ -187,7 +187,10 @@ def top_artist_list( request ):
         artist_dict = {'name' : artist.name, 'user_playcount' : artist.playcount}
         artist_info = api.artist_getinfo( artist = artist.name )
         if hasattr( artist_info.tags, 'tag' ):
-            artist_genre = artist_info.tags.tag[0].name
+            if isinstance( artist_info.tags, list ):
+                artist_genre = artist_info.tags.tag[0].name
+            else:
+                artist_genre = artist_info.tags.tag.name
         else:
             artist_genre = 'unknown'
         artist_dict['genre'] = artist_genre
