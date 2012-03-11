@@ -34,17 +34,17 @@
             var chart_url = '{{root_url}}api/topartists/?callback=?';
             $.getJSON(chart_url, function(chart_data) {
                 pjs.set_artist_data(chart_data);
-                console.log(chart_data);
-                console.log(pjs.artist_data);
+                console.log(chart_data.artists);
+                console.log(pjs.artist_data.artists);
             });            
         }
         
         pjs.set_artist_data = function(data) {
-            pjs.artist_data = data;
+           this.artist_data = data;
         }
         
         pjs.draw = function() {
-            console.log(pjs.artist_data);
+            console.log(this.artist_data);
         }
         
         pjs.mouseClicked = function() {
