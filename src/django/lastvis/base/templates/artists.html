@@ -66,6 +66,22 @@
                    min_total_playcounts = total_playcounts[i];
                }
            }
+           for(var i in total_listeners) {
+               if(total_listeners[i] > max_total_listeners) {
+                   max_total_listeners = total_listeners[i];
+               }
+               if(total_playcounts[i] < min_total_listeners) {
+                   min_total_listeners = total_listeners[i];
+               }
+           }    
+           for(var i in user_listens) {
+               if(user_listens[i] > max_user_listens) {
+                   max_user_listens = user_listens[i];
+               }
+               if(user_listens[i] < min_user_listens) {
+                   min_user_listens = user_listens[i];
+               }
+           }            
            console.log( max_total_playcounts + ', ' + min_total_playcounts );
            console.log( max_total_listeners + ', ' + min_total_listeners );
            console.log( max_user_listens + ', ' + min_user_listens );
