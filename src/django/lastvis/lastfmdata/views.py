@@ -174,6 +174,15 @@ def weekly_chart_list( request ):
 
     return return_data( request, chart_list.to_dict() )
 
+@login_required
+def top_artist_list( request ):
+
+    api, user = get_api_and_user( request )
+
+    artist_list = api.user_gettopartists( user = user.user.username )
+
+    return return_data( request, artist_list.to_dict() )
+
 
 def test( request ):
 
