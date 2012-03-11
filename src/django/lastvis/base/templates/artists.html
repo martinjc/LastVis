@@ -37,8 +37,11 @@
         function draw_name( processingsketch ) {
            if(this.name_visible) {
                 processingsketch.fill( 0,0,0 );
-                processingsketch.text( this.name, this.x, this.y );
-           } 
+                processingsketch.text( this.name, this.x - this.width, this.y + this.width );
+           } else {
+               processingsketch.fill( 255,255,255 );
+               processingsketch.text( this.name, this.x - this.width, this.y + this.width );
+           }
         }
         
         function set_name_visible( visible ) {
