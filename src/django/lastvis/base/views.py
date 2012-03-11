@@ -57,11 +57,7 @@ def weekly_charts( request ):
     lastfm_user = user.get_profile()
     return render_to_response( 'charts.html', { 'lastfmuser' : lastfm_user, 'root_url' : ROOT_URL }, context_instance = RequestContext( request ) )
 
-@login_required
-def jit_charts( request ):
-    user = request.user
-    lastfm_user = user.get_profile()
-    return render_to_response( 'jitcharts.html', { 'lastfmuser' : lastfm_user, 'root_url' : ROOT_URL }, context_instance = RequestContext( request ) )
+
 def processing_test( request ):
 
     return render_to_response( 'test_processing.html', { 'root_url' : ROOT_URL }, context_instance = RequestContext( request ) )
