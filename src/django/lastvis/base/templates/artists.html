@@ -126,16 +126,6 @@
             pjs.offset_y = pjs.mouseY - pjs.mouse_pressed_y + pjs.poffset_y;
         }
         
-        pjs.keyPressed = function() {
-            console.log(pjs.key);
-            if(pjs.key.code == 97) {
-                pjs.zoom_level += 0.5;    
-            } else if(pjs.key.code == 115 ) {
-                pjs.zoom_level -= 0.5;
-            }
-            pjs.zoom_level = pjs.constrain(pjs.zoom_level, 0, 100);
-        }
-        
         pjs.draw = function() {
             pjs.background(255,255,255);
             pjs.pushMatrix();
@@ -151,9 +141,8 @@
             pjs.popMatrix();
             pjs.smooth();
         }
-
+        
         pjs.setup();
-
     });
 </script>
 
