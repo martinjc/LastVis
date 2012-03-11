@@ -107,9 +107,9 @@
            var x_pixels_per_play = (WIDTH - 50) / (max_total_playcounts-min_total_playcounts);
            var y_pixels_per_listener = (HEIGHT - 50) / (max_total_listeners-min_total_listeners);
            var pixels_per_user_play = MAX_CIRCLE_WIDTH / (max_user_listens - min_user_listens);
-           genre_colours = [];
+           var genre_colours = [];
            for(var i in genres) {
-               genre_colours[i].push(pjs.color(pjs.random(255), pjs.random(255),pjs.random(255)));
+               genre_colours.push(pjs.color(pjs.random(255), pjs.random(255),pjs.random(255)));
            }
            
            for(var i  in artist_data.artists) {
