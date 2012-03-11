@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="span8">
-                <canvas id="viscanvas" data-processing-sources="{{STATIC_PATH}}processing/TestJquery.pde {{STATIC_PATH}}processing/Slice.pde {{STATIC_PATH}}processing/LinearAlg.pde"></canvas>
+                <canvas id="viscanvas"></canvas>
             </div>
         </div>
     </div>
@@ -23,7 +23,6 @@
 
 {% block scripts %}
 <script src="{{STATIC_PATH}}js/jquery.json2xml.js"></script>
-<script src="{{STATIC_PATH}}js/processing-1.3.6.js"></script>
 <script>
     var printMessage = function(msg) {
         console.log(msg);
@@ -68,6 +67,6 @@
         });
     });
 </script>
-
+<script src="{{STATIC_PATH}}js/jit-yc.js"></script>
 
 {% endblock %}
