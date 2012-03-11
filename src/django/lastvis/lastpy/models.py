@@ -397,7 +397,7 @@ class Track( Model ):
         else:
             return self._api.track_getsimilar( artist = self.artist, track = self.name, **kargs )
 
-    def toptags( self, **kargs ):
+    def gettoptags( self, **kargs ):
         if hasattr( self.artist, 'name' ):
             return self._api.track_gettags( artist = self.artist.name, track = self.name, **kargs )
         else:
