@@ -2,10 +2,16 @@ private ArrayList<Slice> genres;
 private int fontSize;
 private double pi2 = 2.0*3.141592653;
 
+void consoleLog(String message) {
+  if (javascript!=null) {
+    javascript.consoleLog(message);
+  }
+}
+
+
 Slice addData(String xmlString){
-  Processing.logger = console;
-  print("test");
-  print(xmlString);
+  consoleLog("test");
+  consoleLog(xmlString);
   XMLElement data = XMLElement.parse(xmlString);
 
   int totalplaycount = data.getAttribute("playcount");
