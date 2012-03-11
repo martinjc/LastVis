@@ -158,6 +158,11 @@
                 pjs.fill(this.genre_colours[i]);
                 pjs.text(this.genres[i], WIDTH-150, HEIGHT - (20 * i));
             }
+            pjs.fill(0);
+            pjs.text('Unique Last.FM Listeners ->', 0, HEIGHT-20 );
+            pjs.pushMatrix();
+            pjs.text('Number of plays on Last.FM', 20, HEIGHT-20);
+            pjs.rotate(Math.PI/4);
             pjs.popMatrix();
             pjs.smooth();
         }
