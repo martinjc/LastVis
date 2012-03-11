@@ -51,6 +51,36 @@
                       if(date >= data.charts[i].start && date <= data.charts[i].end) {
                           var chart_url = '{{root_url}}api/weeklychart/' + i + '/?callback=?';
                           $.getJSON(chart_url, function(chart_data) {
+                              
+                                  var json = {
+        'label': ['label A', 'label B', 'label C', 'label D'],
+        'values': [
+        {
+          'label': 'date A',
+          'values': [20, 40, 15, 5]
+        }, 
+        {
+          'label': 'date B',
+          'values': [30, 10, 45, 10]
+        }, 
+        {
+          'label': 'date E',
+          'values': [38, 20, 35, 17]
+        }, 
+        {
+          'label': 'date F',
+          'values': [58, 10, 35, 32]
+        }, 
+        {
+          'label': 'date D',
+          'values': [55, 60, 34, 38]
+        }, 
+        {
+          'label': 'date C',
+          'values': [26, 40, 25, 40]
+        }]
+        
+    };
                               var pieChart = new $jit.PieChart({
                                   //id of the visualization container  
                                   injectInto: 'viscanvas',  
@@ -83,7 +113,7 @@
                                     }  
                                   }                                   
                               });
-                              pieChart.loadJSON(chart_data.chart);
+                              pieChart.loadJSON(json);
                           });
                       }
                   } 
