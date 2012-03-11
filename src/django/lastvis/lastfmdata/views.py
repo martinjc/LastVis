@@ -198,18 +198,18 @@ def top_artist_list( request ):
     return return_data( request, { 'artists' : top_artists } )
 
 @login_required
-def top_artist_list_for_user( request, user_name ):
+def top_artist_list_for_user( request, other_user_name ):
 
     api, lfmuser = get_api_and_user( request )
 
-    artist_list = api.user_gettopartists( user = user_name )
+    artist_list = api.user_gettopartists( user = other_user_name )
     logger.info( artist_list )
 
     top_artists = []
 
     for artist in artist_list.artists:
         artist_dict = {'name' : artist.name, 'user_playcount' : artist.playcount}
-        artist_info = api.artist_getinfo( artist = artist.name, user = user_name )
+        artist_info = api.artist_getinfo( artist = artist.name, user = other_user_name )
         if hasattr( artist_info.tags, 'tag' ):
             artist_genre = artist_info.tags.tag[0].name
         else:
