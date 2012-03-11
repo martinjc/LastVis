@@ -56,14 +56,15 @@
         
         pjs.set_artist_data = function(data) {
            this.bubbles = [];
+           
            var artist_data = data;
            var total_playcounts = [];
            var total_listeners = [];
            var user_listens = [];
-           for(var i in this.artist_data.artists) {
-               total_playcounts.push(this.artist_data.artists[i].total_playcount);
-               total_listeners.push(this.artist_data.artists[i].total_listeners);
-               user_listens.push(this.artist_data.artists[i].user_playcount);  
+           for(var i in artist_data.artists) {
+               total_playcounts.push(artist_data.artists[i].total_playcount);
+               total_listeners.push(artist_data.artists[i].total_listeners);
+               user_listens.push(artist_data.artists[i].user_playcount);  
            }
            var max_total_playcounts = Math.max.apply(null, total_playcounts);
            var min_total_playcounts = Math.min.apply(null, total_playcounts);
@@ -75,11 +76,12 @@
            var y_pixels_per_listener = (HEIGHT - 50) / (max_total_listeners-min_total_listeners);
            var pixels_per_user_play = MAX_CIRCLE_WIDTH / (max_user_listens - min_user_listens);
            
-           for(var i  in this.artist_data.artists) {
-               var x = 25 + x_pixels_per_play * (this.artist_data.artists[i].total_playcount - min_total_playcounts);
-               var y = (HEIGHT -  25) - (y_pixels_per_listener * (this.artist_data.artists[i].total_listeners - min_total_listeners));
-               var width = pixels_per_user_play * (this.artist_data.artists[i].user_playcount - min_user_listens);
+           for(var i  in artist_data.artists) {
+               var x = 25 + x_pixels_per_play * (artist_data.artists[i].total_playcount - min_total_playcounts);
+               var y = (HEIGHT -  25) - (y_pixels_per_listener * (artist_data.artists[i].total_listeners - min_total_listeners));
+               var width = pixels_per_user_play * (artist_data.artists[i].user_playcount - min_user_listens);
                var bubble = new bubble(x, y, width);
+               console.log(bubble);
                this.bubbles.push(bubble);
            }
         }
