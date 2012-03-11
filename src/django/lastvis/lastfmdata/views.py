@@ -203,6 +203,7 @@ def top_artist_list_for_user( request, user_name ):
     api, lfmuser = get_api_and_user( request )
 
     artist_list = api.user_gettopartists( user = user_name )
+    logger.info( artist_list )
 
     top_artists = []
 
