@@ -56,7 +56,6 @@
             pjs.size(WIDTH, HEIGHT);
             pjs.background(255);
             pjs.smooth();
-            pjs.beginCamera();
             pjs.textFont(pjs.loadFont("Ziggurat-HTF-Black-32.vlw"), 8);
 
             var chart_url = '{{root_url}}api/topartists/?callback=?';
@@ -99,17 +98,16 @@
         }
         
         pjs.mouseClicked = function() {
-            console.log(pjs.mouseButton);
             if(pjs.mouseButton === 37) {
                 pjs.scale(2.0);    
             } else {
                 pjs.scale(0.5);
             }
+            pjs.translate(pjs.mouseX, pjs.mouseY);
             pjs.redraw();
         }
         
         pjs.draw = function() {
-            pjs.camera();
             pjs.background(255,255,255);
             for(var i in this.bubbles) {
                 this.bubbles[i].render(pjs);
