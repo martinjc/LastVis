@@ -42,7 +42,7 @@ def get_api_and_user( request ):
 
 @login_required
 def user_info( request, user_name = None ):
-
+    logger.info( 'USER_INFO' )
     api, user = get_api_and_user( request )
 
     if user_name is None:
@@ -199,7 +199,7 @@ def top_artist_list( request ):
 
 @login_required
 def top_artist_list_for_user( request, other_user_name ):
-
+    logger.info( 'TOP_ARTIST_LIST_FOR_USER' )
     api, lfmuser = get_api_and_user( request )
 
     artist_list = api.user_gettopartists( user = other_user_name )
