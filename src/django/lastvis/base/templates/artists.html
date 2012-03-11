@@ -98,6 +98,10 @@
            }
         }
         
+        pjs.mouseclicked = function() {
+            pjs.scale(2.0);
+        }
+        
         pjs.draw = function() {
             for(var i in this.bubbles) {
                 this.bubbles[i].render(pjs);
