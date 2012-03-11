@@ -30,15 +30,38 @@
         
        function render_bubble( processingsketch ) {
            processingsketch.fill(pjs.random(255), pjs.random(255),pjs.random(255));
-           processingsketch.ellipse(this.x, this.y, this.width, this.width);        
+           processingsketch.ellipse(this.x, this.y, this.width, this.width);
+           if(this.name_visible) {
+                processingsketch.text( this.name, this.x, this.y );
+           }        
         }
         
-        function bubble(x, y, width) {
+        function set_name_visible( visible ) {
+            this.name_visible = visible;
+        }
+        
+        function contains( x, y ) {
+            if(Math.sqrt((this.x-x)^2+(this.y-y)^2) <= this.width) {
+                console.log('point is in there');
+                return true;
+            }
+            else {
+                return false;
+            }
+            
+        }
+        
+        function bubble(x, y, width, name) {
             this.x = x;
             this.y = y;
             this.width = width;
+            this.name = name;
+            
+            this.name_visible = false;
             
             this.render = render_bubble;
+            this.set_name_visible = set_name_visible;
+            this.contains = contains;
         }
         
         pjs.artist_data = {};
@@ -47,6 +70,7 @@
             pjs.noLoop();
             pjs.background(255);
             pjs.smooth();
+            pjs.textFont(pjs.loadFont("Ziggurat-HTF-Black-32.vlw"), 16);
             var chart_url = '{{root_url}}api/topartists/?callback=?';
             $.getJSON(chart_url, function(chart_data) {
                 pjs.set_artist_data(chart_data);
@@ -80,11 +104,10 @@
                var x = 25 + x_pixels_per_play * (artist_data.artists[i].total_playcount - min_total_playcounts);
                var y = (HEIGHT -  25) - (y_pixels_per_listener * (artist_data.artists[i].total_listeners - min_total_listeners));
                var width = pixels_per_user_play * (artist_data.artists[i].user_playcount - min_user_listens);
-               var b = new bubble(x, y, width);
-               console.log(x + ', ' + y + ', ' + width)
+               var name = artist_data.artists[i].name;
+               var b = new bubble(x, y, width, name);
                this.bubbles.push(b);
            }
-           console.log(this.bubbles);
         }
         
         pjs.draw = function() {
@@ -95,9 +118,18 @@
         }
         
         pjs.mouseClicked = function() {
+            var mouseX = pjs.mouseX;
+            var mouseY = pjs.mouseY;
+            for(var i in this.bubbles) {
+                if(this.bubbles[i].contains(mouseX, mouseY)) {
+                    this.bubbles[i].set_name_visible(true);
+                }
+                else {
+                    this.bubbles[i].set_name_visible(false);
+                }
+            }
             pjs.redraw();
         }
-
         pjs.setup();
 
     });
