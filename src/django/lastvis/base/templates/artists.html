@@ -62,9 +62,13 @@
            console.log( max_total_playcounts );
            console.log( min_total_playcounts );
            console.log( max_total_listeners );
-           console.log( max_total_listeners );
+           console.log( min_total_listeners );
            console.log( max_user_listens );
            console.log( min_user_listens );
+           var x_pixels_per_listener = 800/(max_total_playcounts-min_total_playcounts);
+           var y_pixels_per_listener = 800/(max_total_listeners-min_total_listeners);
+           console.log(x_pixels_per_listener);
+           console.log(y_pixels_per_listener);
         }
         
         pjs.mouseClicked = function() {
