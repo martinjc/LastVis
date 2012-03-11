@@ -29,7 +29,7 @@
             else {
                 document.zoom_level += 0.5
             }
-        })
+        });
         var WIDTH = 1000;
         var HEIGHT = 800;
         var MAX_CIRCLE_WIDTH = 100;
@@ -158,7 +158,7 @@
             pjs.text('Last.FM Total Playcount ->', BORDER, HEIGHT-BORDER);
             pjs.pushMatrix();
             pjs.rotate(Math.PI/2.0);
-            pjs.text('Last.FM Total Listeners ->', 0, HEIGHT-BORDER);
+            pjs.text('Last.FM Total Listeners ->', 0+20, HEIGHT-BORDER);
             pjs.popMatrix();
             pjs.smooth();
         }
