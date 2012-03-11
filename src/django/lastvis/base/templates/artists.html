@@ -14,12 +14,16 @@
 
 {% block scripts %}
 <script src="{{STATIC_PATH}}js/processing-1.3.6.js"></script>
+<script src="{{STATIC_PATH}}js/jquery.mousewheel.min.js"></script>
 <script>
     var printMessage = function(msg) {
         console.log(msg);
     }
     
     $(document).ready(function(){
+        $('#viscanvas').bind('mousewheel', function(event, delta) {
+            console.log(delta);
+        })
         var WIDTH = 1000;
         var HEIGHT = 800;
         var MAX_CIRCLE_WIDTH = 100;
