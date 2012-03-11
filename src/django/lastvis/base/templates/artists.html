@@ -100,10 +100,10 @@
         pjs.mouseClicked = function() {
             //pjs.translate(pjs.mouseX, pjs.mouseY);
             if(pjs.mouseButton === pjs.LEFT) {
-                pushMatrix();
+                pjs.pushMatrix();
                 pjs.scale(2.0);    
             } else {
-                popMatrix();
+                pjs.popMatrix();
             }
             pjs.redraw();
         }
