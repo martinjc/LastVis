@@ -181,7 +181,15 @@ def top_artist_list( request ):
 
     artist_list = api.user_gettopartists( user = user.user.username )
 
-    return return_data( request, artist_list.to_dict() )
+    top_artists = []
+
+    for artist in artist_list.artists:
+        artist_dict = {'name' : artist.name, 'user_playcount' : artist.playcount}
+        artist_info = api.artist_getinfo( artist = artist.name )
+        artist_dict['total_playcount'] = artist_info.artist.stats.playcount
+        top_artists.append( artist_dict )
+
+    return return_data( request, { 'artists' : top_artists } )
 
 
 def test( request ):
