@@ -75,7 +75,7 @@
                var y = (HEIGHT -  25) - (y_pixels_per_listener * (this.artist_data.artists[i].total_listeners - min_total_listeners));
                var width = pixels_per_user_play * (this.artist_data.artists[i].user_playcount - min_user_listens);
                console.log(x + ', ' + 'y ' + ', ' + width);
-               pjs.fill(random(255), random(255),random(255));
+               pjs.fill(pjs.random(255), pjs.random(255),pjs.random(255));
                pjs.ellipse(x, y, width, width);
            }
            
