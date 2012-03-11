@@ -50,8 +50,7 @@
            for(var i in this.artist_data.artists) {
                total_playcounts.push(this.artist_data.artists[i].total_playcount);
                total_listeners.push(this.artist_data.artists[i].total_listeners);
-               user_listens.push(this.artist_data.artists[i].user_playcount);
-               
+               user_listens.push(this.artist_data.artists[i].user_playcount);  
            }
            var max_total_playcounts = pjs.max(total_playcounts);
            var min_total_playcounts = pjs.min(total_playcounts);
@@ -70,6 +69,7 @@
            console.log(x_pixels_per_play);
            console.log(y_pixels_per_listener);
            for(var i in this.artist_data.artists) {
+               console.log( this.artist_data.artists[i].total_playcount + ', ' + this.artist_data.artists[i].total_listeners );
                var x = x_pixels_per_play * (this.artist_data.artists[i].total_playcount - min_total_playcounts);
                var y = y_pixels_per_listener * (this.artist_data.artists[i].total_listeners - min_total_listeners);
                console.log(x + ', ' + y);
