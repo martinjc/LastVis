@@ -89,13 +89,13 @@
            var total_playcounts = [];
            var total_listeners = [];
            var user_listens = [];
-           var genres = [];
+           this.genres = [];
            for(var i in artist_data.artists) {
                total_playcounts.push(artist_data.artists[i].total_playcount);
                total_listeners.push(artist_data.artists[i].total_listeners);
                user_listens.push(artist_data.artists[i].user_playcount);
-               if ($.inArray(artist_data.artists[i].genre, genres) < 0) {
-                   genres.push(artist_data.artists[i].genre);
+               if ($.inArray(artist_data.artists[i].genre, this.genres) < 0) {
+                   this.genres.push(artist_data.artists[i].genre);
                }
            }
            var max_total_playcounts = Math.max.apply(null, total_playcounts);
@@ -107,9 +107,9 @@
            var x_pixels_per_play = (WIDTH - 50) / (max_total_playcounts-min_total_playcounts);
            var y_pixels_per_listener = (HEIGHT - 50) / (max_total_listeners-min_total_listeners);
            var pixels_per_user_play = MAX_CIRCLE_WIDTH / (max_user_listens - min_user_listens);
-           var genre_colours = [];
-           for(var i in genres) {
-               genre_colours.push(pjs.color(pjs.random(255), pjs.random(255),pjs.random(255)));
+           this.genre_colours = [];
+           for(var i in this.genres) {
+               this.genre_colours.push(pjs.color(pjs.random(255), pjs.random(255),pjs.random(255)));
            }
            
            for(var i  in artist_data.artists) {
@@ -119,8 +119,8 @@
                var name = artist_data.artists[i].name;
                var colour = null;
                for(var j in genres) {
-                   if(genres[j] === artist_data.artists[i].genre) {
-                       colour = genre_colours[j];
+                   if(this.genres[j] === artist_data.artists[i].genre) {
+                       colour = this.genre_colours[j];
                    }
                }
                var b = new bubble(x, y, width, name, colour);
@@ -155,10 +155,9 @@
             pjs.popMatrix();
             
             pjs.textFont(pjs.loadFont("Ziggurat-HTF-Black-32.vlw"), 12);
-            pjs.text('Last.FM Total Playcount ->', BORDER, HEIGHT-BORDER);
-            pjs.pushMatrix();
-            pjs.rotate(Math.PI/2.0);
-            pjs.text('Last.FM Total Listeners ->', 0+20, HEIGHT-BORDER);
+            for(var i in this.genres) {
+                pjs.text(this.genres[i], WIDTH-BORDER, HEIGHT - (BORDER * i));    
+            }
             pjs.popMatrix();
             pjs.smooth();
         }
