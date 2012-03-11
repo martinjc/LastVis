@@ -31,6 +31,12 @@
             pjs.noLoop();
             pjs.background(255);
             pjs.smooth();
+            var chart_url = '{{root_url}}api/topartists/?callback=?';
+            $.getJSON(chart_url, function(chart_data) {
+                pjs.set_artist_data(chart_data);
+                console.log(chart_data);
+                console.log(pjs.artist_data);
+            });            
         }
         
         pjs.set_artist_data = function(data) {
@@ -44,12 +50,7 @@
         pjs.mouseClicked = function() {
             pjs.redraw();
         }
-        var chart_url = '{{root_url}}api/topartists/?callback=?';
-        $.getJSON(chart_url, function(chart_data) {
-            pjs.set_artist_data(chart_data);
-            console.log(chart_data);
-            console.log(pjs.artist_data);
-        });
+
         pjs.setup();
 
     });
