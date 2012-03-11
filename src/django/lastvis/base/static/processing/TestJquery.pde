@@ -61,6 +61,7 @@ void setup(){
   noStroke();
   fontSize = 16;
   textFont(loadFont("Ziggurat-HTF-Black-32.vlw"), fontSize);
+  Processing.logger = console;
 }
 
 void render(){
