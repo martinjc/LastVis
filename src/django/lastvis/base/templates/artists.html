@@ -46,7 +46,10 @@
         
         function draw_name( processingsketch ) {
             processingsketch.fill( 0,0,0 );
-            processingsketch.text( this.name, this.x + (this.width/2 + 2), this.y );
+            var font_size = 10/document.zoom_level;
+            pjs.textFont(pjs.loadFont("Ziggurat-HTF-Black-32.vlw"), font_size);
+            var gap = (this.width/document.zoom_level)/2
+            processingsketch.text( this.name, this.x + (gap + 2), this.y );
         }
         
         function bubble(x, y, width, name, colour) {
