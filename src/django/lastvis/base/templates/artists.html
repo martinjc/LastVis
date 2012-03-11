@@ -57,11 +57,12 @@
             pjs.background(255);
             pjs.smooth();
             pjs.textFont(pjs.loadFont("Ziggurat-HTF-Black-32.vlw"), 8);
-            pjs.camera();
+
             var chart_url = '{{root_url}}api/topartists/?callback=?';
             $.getJSON(chart_url, function(chart_data) {
                 pjs.set_artist_data(chart_data);
                 pjs.redraw();
+                pjs.camera();
             });            
         }
         
