@@ -54,8 +54,11 @@
         pjs.artist_data = {};
         pjs.setup = function() {
             pjs.size(WIDTH, HEIGHT);
-            pjs.centreX = WIDTH/2;
-            pjs.centreY = HEIGHT/2;
+            pjs.zoom_level = 1.0;
+            pjs.poffset_x = 0;
+            pjs.poffset_y = 0;
+            pjs.offset_x = 0;
+            pjs.offset_y = 0;
             pjs.background(255);
             pjs.smooth();
             pjs.textFont(pjs.loadFont("Ziggurat-HTF-Black-32.vlw"), 8);
@@ -99,27 +102,41 @@
            }
         }
         
+        pjs.mousePressed = function() {
+           pjs.mouse_pressed_x = pjs.mouseX;
+           pjs.mouse_pressed_y = pjs.mouseY;
+           pjs.poffset_x = pjs.offset_x;
+           pjs.poffset_y = pjs.offset_y;
+        }
+        
+        pjs.mouseDragged = function() {
+            pjs.offset_x = pjs.mouseX - pjs.mouse_pressed_x + pjs.poffset_x;
+            pjs.offset_y = pjs.mouseY - pjs.mouse_pressed_y + pjs.poffset_y;
+        }
+        
         pjs.mouseClicked = function() {
-            var x_translate = pjs.centreX - pjs.mouseX;
-            var y_translate = pjs.centreY - pjs.mouseY;
-            pjs.translate(x_translate, y_translate);
             if(pjs.mouseButton === pjs.LEFT) {
-                pjs.pushMatrix();
-                pjs.scale(2.0);    
+                pjs.zoom_level += 0.1;    
             } else {
-                pjs.popMatrix();
+                pjs.zoom_level -= 0.1;
             }
+            pjs.zoom_level = pjs.constrain(pjs.zoom_level, 0, 100);
             pjs.redraw();
         }
         
         pjs.draw = function() {
             pjs.background(255,255,255);
+            pushMatrix();
+            pjs.scale(pjs.zoom_level);
+            pjs.translate( (pjs.offset_x/pjs.zoom_level), (pjs.offset_y/pjs.zoom_level));
+            
             for(var i in this.bubbles) {
                 this.bubbles[i].render(pjs);
             }
             for(var i in this.bubbles) {
                 this.bubbles[i].draw_name(pjs);
             }
+            popMatrix();
             pjs.smooth();
         }
 
