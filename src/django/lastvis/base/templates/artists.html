@@ -35,31 +35,11 @@
         }
         
         function draw_name( processingsketch ) {
-           if(this.name_visible) {
-                processingsketch.fill( 0,0,0 );
-                processingsketch.text( this.name, this.x - this.width, this.y + this.width );
-           } else {
-               processingsketch.fill( 255,255,255 );
-               processingsketch.text( this.name, this.x - this.width, this.y + this.width );
-           }
+            processingsketch.fill( 0,0,0 );
+            processingsketch.text( this.name, this.x - this.width, this.y + this.width );
         }
         
-        function set_name_visible( visible ) {
-            this.name_visible = visible;
-        }
-        
-        function contains( x, y ) {
-            if(Math.sqrt((this.x-(x+BORDER))^2+(this.y-(y+BORDER))^2) <= this.width/2) {
-                console.log('point is in there');
-                return true;
-            }
-            else {
-                return false;
-            }
-            
-        }
-        
-        function bubble(x, y, width, name) {
+        function bubble(x, y, width, name, ps) {
             this.x = x;
             this.y = y;
             this.width = width;
@@ -68,8 +48,6 @@
             this.name_visible = false;
             
             this.render = render_bubble;
-            this.set_name_visible = set_name_visible;
-            this.contains = contains;
             this.draw_name = draw_name;
         }
         
@@ -78,7 +56,7 @@
             pjs.size(WIDTH, HEIGHT);
             pjs.background(255);
             pjs.smooth();
-            pjs.textFont(pjs.loadFont("Ziggurat-HTF-Black-32.vlw"), 16);
+            pjs.textFont(pjs.loadFont("Ziggurat-HTF-Black-32.vlw"), 8);
             var chart_url = '{{root_url}}api/topartists/?callback=?';
             $.getJSON(chart_url, function(chart_data) {
                 pjs.set_artist_data(chart_data);
@@ -127,18 +105,7 @@
             }
             pjs.smooth();
         }
-        
-        pjs.mouseClicked = function() {
-            var mouseX = pjs.mouseX;
-            var mouseY = pjs.mouseY;
-            for(var i in this.bubbles) {
-                this.bubbles[i].set_name_visible(false);
-                if(this.bubbles[i].contains(mouseX, mouseY)) {
-                    this.bubbles[i].set_name_visible(true);
-                }
-            }
-            pjs.redraw();
-        }
+
         pjs.setup();
 
     });
