@@ -64,15 +64,15 @@
            var max_user_listens = Math.max.apply(null, user_listens);
            var min_user_listens = Math.min.apply(null, user_listens);
            console.log( max_user_listens + ', ' + min_user_listens );
-           var x_pixels_per_play = WIDTH / (max_total_playcounts-min_total_playcounts);
-           var y_pixels_per_listener = HEIGHT / (max_total_listeners-min_total_listeners);
+           var x_pixels_per_play = (WIDTH - 50) / (max_total_playcounts-min_total_playcounts);
+           var y_pixels_per_listener = (HEIGHT - 50) / (max_total_listeners-min_total_listeners);
            var pixels_per_user_play = MAX_CIRCLE_WIDTH / (max_user_listens - min_user_listens);
            console.log(x_pixels_per_play);
            console.log(y_pixels_per_listener);
            for(var i in this.artist_data.artists) {
                console.log( (this.artist_data.artists[i].total_playcount - min_total_playcounts) + ', ' + (this.artist_data.artists[i].total_listeners - min_total_listeners) );
-               var x = x_pixels_per_play * (this.artist_data.artists[i].total_playcount - min_total_playcounts);
-               var y = HEIGHT - (y_pixels_per_listener * (this.artist_data.artists[i].total_listeners - min_total_listeners));
+               var x = 25 + x_pixels_per_play * (this.artist_data.artists[i].total_playcount - min_total_playcounts);
+               var y = (HEIGHT -  25) - (y_pixels_per_listener * (this.artist_data.artists[i].total_listeners - min_total_listeners));
                var width = pixels_per_user_play * (this.artist_data.artists[i].user_playcount - min_user_listens);
                console.log(x + ', ' + 'y ' + ', ' + width);
                pjs.ellipse(x, y, width, width);
