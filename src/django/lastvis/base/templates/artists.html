@@ -30,7 +30,7 @@
         
        function render_bubble( processingsketch ) {
            processingsketch.fill(pjs.random(255), pjs.random(255),pjs.random(255));
-           processingsketch.ellipse(x, y, width, width);        
+           processingsketch.ellipse(this.x, this.y, this.width, this.width);        
         }
         
         function bubble(x, y, width) {
@@ -84,6 +84,7 @@
                console.log(x + ', ' + y + ', ' + width)
                this.bubbles.push(b);
            }
+           console.log(this.bubbles);
         }
         
         pjs.draw = function() {
