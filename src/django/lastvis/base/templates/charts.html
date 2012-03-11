@@ -28,7 +28,7 @@
     var printMessage = function(msg) {
         console.log(msg);
     }
-
+    
     $.getJSON('{{root_url}}api/weeklychartlist/', function(data) {
         var max = 0;
         var min = 9007199254740992;
@@ -54,12 +54,12 @@
                           var pjs = Processing.getInstanceById('viscanvas');
                           var chart_url = '{{root_url}}api/weeklychart/' + i + '/?callback=?';
                           $.getJSON(chart_url, function(chart_data) {
-                              var options = {
-                                  formatOutput : true,
-                              };
-                              var xmlData = $.json2xml(chart_data.chart, options);
+                              //var options = {
+                              //    formatOutput : true,
+                              //};
+                              //var xmlData = $.json2xml(chart_data.chart, options);
                               //console.log(xmlData);
-                              pjs.addData(xmlData);
+                              pjs.addData(chart_data);
                           });
                       }
                   } 
