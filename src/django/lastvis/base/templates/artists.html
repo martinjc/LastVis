@@ -23,7 +23,7 @@
         var WIDTH = 800;
         var HEIGHT = 600;
         var MAX_CIRCLE_WIDTH = 50;
-        var BORDER = 25;
+        var BORDER = 50;
         var canvas = document.getElementById('viscanvas');
         var pjs = new Processing(canvas);
         
@@ -36,7 +36,7 @@
         
         function draw_name( processingsketch ) {
             processingsketch.fill( 0,0,0 );
-            processingsketch.text( this.name, this.x - this.width, this.y + this.width );
+            processingsketch.text( this.name, this.x, this.y + this.width );
         }
         
         function bubble(x, y, width, name, ps) {
