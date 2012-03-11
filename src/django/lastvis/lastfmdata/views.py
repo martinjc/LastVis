@@ -200,7 +200,7 @@ def top_artist_list( request ):
 @login_required
 def top_artist_list_for_user( request, user_name ):
 
-    api, user = get_api_and_user( request )
+    api, lfmuser = get_api_and_user( request )
 
     artist_list = api.user_gettopartists( user = user_name )
 
