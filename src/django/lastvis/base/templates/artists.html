@@ -1,15 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="span4">
-                <h1>Welcome {{lastfmuser.user.username}}!</h1>
-            <div class="span8">
-                <canvas id="viscanvas"></canvas>
-            </div>
-        </div>
+    <div class="container hero-unit">
+            <h1>{{lastfmuser.user.username}}'s Top Artists</h1>
     </div>
+    <canvas id="viscanvas"></canvas>
 {% endblock %}
 
 {% block scripts %}
