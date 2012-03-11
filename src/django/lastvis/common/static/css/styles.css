@@ -6,6 +6,14 @@ img.logo {
 	margin-bottom: 1em;
 }
 
-.hero-unit h1, h2, h3{
+.hero-unit h1{
+	color: #D51007;
+}
+
+.hero-unit h2{
+	color: #D51007;
+}
+
+.hero-unit h3{
 	color: #D51007;
 }
