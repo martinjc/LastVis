@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container hero-unit">
+        <div class="row">
+            <div class="span6">
+                <h3>{{lastfmuser.user.username}}'s Top Artists Comparison</h3>
+                <p> This allows you to compare your top artists to another Last.FM User</p>      
+            </div>
+        </div>
+
+    </div>
+    <div class="container">
+        <canvas id="viscanvas"></canvas>    
+    </div>
+    
+{% endblock %}
+
+{% block scripts %}
+<script src="{{STATIC_PATH}}js/processing-1.3.6.js"></script>
+<script src="{{STATIC_PATH}}js/jquery.mousewheel.min.js"></script>
+<script>
+    var printMessage = function(msg) {
+        console.log(msg);
+    }
+    
+    $(document).ready(function(){
+        document.zoom_level = 1.0;
+        $('#viscanvas').bind('mousewheel', function(event, delta) {
+            if(delta < 0) {
+                document.zoom_level -= 0.5;
+            }
+            else {
+                document.zoom_level += 0.5
+            }
+        });
+        var WIDTH = 1000;
+        var HEIGHT = 650;
+        var MAX_CIRCLE_WIDTH = 100;
+        var BORDER = 50;
+        var canvas = document.getElementById('viscanvas');
+        var pjs = new Processing(canvas);
+        
+        var value = 0;
+        
+       function render_bubble( processingsketch ) {
+           processingsketch.fill(this.colour);
+           processingsketch.ellipse(this.x, this.y, this.width, this.width);
+        }
+        
+        function draw_name( processingsketch ) {
+            processingsketch.fill( 0,0,0 );
+            processingsketch.text( this.name, this.x, this.y + this.width/2 );
+        }
+        
+        function bubble(x, y, width, name, colour) {
+            this.x = x;
+            this.y = y;
+            this.width = width;
+            this.name = name;
+            this.colour = colour;
+            
+            this.name_visible = false;
+            
+            this.render = render_bubble;
+            this.draw_name = draw_name;
+        }
+        
+        pjs.artist_data = {};
+        pjs.setup = function() {
+            pjs.size(WIDTH, HEIGHT);
+            pjs.zoom_level = document.zoom_level;
+            pjs.poffset_x = 0;
+            pjs.poffset_y = 0;
+            pjs.offset_x = 0;
+            pjs.offset_y = 0;
+            pjs.background(255);
+            pjs.loop();
+            pjs.smooth();
+            pjs.textFont(pjs.loadFont("Ziggurat-HTF-Black-32.vlw"), 10);
+
+            var chart_url = '{{root_url}}api/topartists/?callback=?';
+            $.getJSON(chart_url, function(chart_data) {
+                pjs.set_artist_data(chart_data);
+                pjs.redraw();
+            });            
+        }
+        
+        pjs.set_artist_data = function(data) {
+           this.bubbles = [];
+           
+           var artist_data = data;
+           var total_playcounts = [];
+           var total_listeners = [];
+           var user_listens = [];
+           this.genres = [];
+           for(var i in artist_data.artists) {
+               total_playcounts.push(artist_data.artists[i].total_playcount);
+               total_listeners.push(artist_data.artists[i].total_listeners);
+               user_listens.push(artist_data.artists[i].user_playcount);
+               if ($.inArray(artist_data.artists[i].genre, this.genres) < 0) {
+                   this.genres.push(artist_data.artists[i].genre);
+               }
+           }
+           var max_total_playcounts = Math.max.apply(null, total_playcounts);
+           var min_total_playcounts = Math.min.apply(null, total_playcounts);
+           var max_total_listeners =  Math.max.apply(null, total_listeners);
+           var min_total_listeners = Math.min.apply(null, total_listeners);
+           var max_user_listens = Math.max.apply(null, user_listens);
+           var min_user_listens = Math.min.apply(null, user_listens);
+           var x_pixels_per_play = (WIDTH - 50) / (max_total_playcounts-min_total_playcounts);
+           var y_pixels_per_listener = (HEIGHT - 50) / (max_total_listeners-min_total_listeners);
+           var pixels_per_user_play = MAX_CIRCLE_WIDTH / (max_user_listens - min_user_listens);
+           this.genre_colours = [];
+           for(var i in this.genres) {
+               this.genre_colours.push(pjs.color(pjs.random(255), pjs.random(255),pjs.random(255)));
+           }
+           
+           for(var i  in artist_data.artists) {
+               var x = BORDER + x_pixels_per_play * (artist_data.artists[i].total_playcount - min_total_playcounts);
+               var y = (HEIGHT -  BORDER) - (y_pixels_per_listener * (artist_data.artists[i].total_listeners - min_total_listeners));
+               var width = pixels_per_user_play * (artist_data.artists[i].user_playcount - min_user_listens);
+               var name = artist_data.artists[i].name;
+               var colour = null;
+               for(var j in this.genres) {
+                   if(this.genres[j] === artist_data.artists[i].genre) {
+                       colour = this.genre_colours[j];
+                   }
+               }
+               var b = new bubble(x, y, width, name, colour);
+               this.bubbles.push(b);
+           }
+        }
+        
+        pjs.mousePressed = function() {
+           pjs.mouse_pressed_x = pjs.mouseX;
+           pjs.mouse_pressed_y = pjs.mouseY;
+           pjs.poffset_x = pjs.offset_x;
+           pjs.poffset_y = pjs.offset_y;
+        }
+        
+        pjs.mouseDragged = function() {
+            pjs.offset_x = pjs.mouseX - pjs.mouse_pressed_x + pjs.poffset_x;
+            pjs.offset_y = pjs.mouseY - pjs.mouse_pressed_y + pjs.poffset_y;
+        }
+        
+        pjs.draw = function() {
+            pjs.background(255,255,255);
+            pjs.pushMatrix();
+            pjs.scale(document.zoom_level);
+            pjs.translate( (pjs.offset_x/pjs.zoom_level), (pjs.offset_y/pjs.zoom_level));
+            
+            for(var i in this.bubbles) {
+                this.bubbles[i].render(pjs);
+            }
+            for(var i in this.bubbles) {
+                this.bubbles[i].draw_name(pjs);
+            }
+            pjs.popMatrix();
+            
+            pjs.textFont(pjs.loadFont("Ziggurat-HTF-Black-32.vlw"), 16);
+            for(var i in this.genres) {
+                pjs.fill(this.genre_colours[i]);
+                pjs.text(this.genres[i], WIDTH-150, HEIGHT - (20 * i));
+            }
+            pjs.popMatrix();
+            pjs.smooth();
+        }
+        
+        pjs.setup();
+    });
+</script>
+
+
+{% endblock %}

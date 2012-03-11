@@ -64,6 +64,12 @@ def artists( request ):
     return render_to_response( 'artists.html', { 'lastfmuser' : lastfm_user, 'root_url' : ROOT_URL }, context_instance = RequestContext( request ) )
 
 
+@login_required
+def versus( request ):
+    user = request.user
+    lastfm_user = user.get_profile()
+    return render_to_response( 'versus.html', { 'lastfmuser' : lastfm_user, 'root_url' : ROOT_URL }, context_instance = RequestContext( request ) )
+
 def processing_test( request ):
 
     return render_to_response( 'test_processing.html', { 'root_url' : ROOT_URL }, context_instance = RequestContext( request ) )

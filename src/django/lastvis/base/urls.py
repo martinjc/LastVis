@@ -14,4 +14,6 @@ urlpatterns = patterns( 'base.views',
     url( r'^weeklycharts/$', view = weekly_charts, name = 'weekly_charts' ),
 
     url( r'^artists/$', view = artists, name = 'artists' ),
+
+    url( r'^versus/$', view = versus, name = 'versus' ),
  )
