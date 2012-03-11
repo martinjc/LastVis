@@ -99,7 +99,11 @@
         }
         
         pjs.mouseClicked = function() {
-            pjs.scale(2.0);
+            if(pjs.mouseButton === 'LEFT') {
+                pjs.scale(2.0);    
+            } else {
+                pjs.scale(0.5);
+            }
             pjs.redraw();
         }
         
