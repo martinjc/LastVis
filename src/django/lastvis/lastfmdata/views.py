@@ -210,6 +210,7 @@ def top_track_list( request ):
     for track in track_list.tracks:
         track_dict = {'name' : track.name, 'user_playcount' : track.playcount}
         track_info = api.track_getinfo( artist = track.artist.name, track = track.name )
+        logger.info( dir( track_info.toptags ) )
         if hasattr( track_info.toptags, 'tag' ):
             track_genre = track_info.toptags.tag[0].name
         else:
